@@ -69,6 +69,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MAC下安装pycurl解决办法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/24/MAC下安装pycurl解决办法/" class="article-date">
+  <time datetime="2018-01-24T07:39:17.000Z" itemprop="datePublished">2018-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/24/MAC下安装pycurl解决办法/">MAC下安装pycurl解决办法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sudo pip install pycurl报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  src/pycurl.h:185:5: warning: &quot;libcurl was compiled with SSL support, but configure could not determine which &quot;      &quot;library was used; thus no SSL crypto locking callbacks will be set, which may &quot;      &quot;cause random crashes on SSL requests&quot; [-W#warnings]</span><br><span class="line">    #   warning \</span><br><span class="line">        ^</span><br><span class="line">    1 warning generated.</span><br><span class="line">    cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. build/temp.macosx-10.13-intel-2.7/src/docstrings.o build/temp.macosx-10.13-intel-2.7/src/easy.o build/temp.macosx-10.13-intel-2.7/src/module.o build/temp.macosx-10.13-intel-2.7/src/multi.o build/temp.macosx-10.13-intel-2.7/src/oscompat.o build/temp.macosx-10.13-intel-2.7/src/pythoncompat.o build/temp.macosx-10.13-intel-2.7/src/share.o build/temp.macosx-10.13-intel-2.7/src/stringcompat.o build/temp.macosx-10.13-intel-2.7/src/threadsupport.o -lcurl -o build/lib.macosx-10.13-intel-2.7/pycurl.so</span><br><span class="line">    running install_lib</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/pycurl.so -&gt; /Library/Python/2.7/site-packages</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/curl/__init__.py -&gt; /Library/Python/2.7/site-packages/curl</span><br><span class="line">    byte-compiling /Library/Python/2.7/site-packages/curl/__init__.py to __init__.pyc</span><br><span class="line">    running install_data</span><br><span class="line">    creating /System/Library/Frameworks/Python.framework/Versions/2.7/share</span><br><span class="line">    error: could not create &apos;/System/Library/Frameworks/Python.framework/Versions/2.7/share&apos;: Operation not permitted</span><br><span class="line">    </span><br><span class="line">    ----------------------------------------</span><br><span class="line">Command &quot;/usr/bin/python -u -c &quot;import setuptools, tokenize;__file__=&apos;/private/tmp/pip-build-7AHn_4/pycurl/setup.py&apos;;f=getattr(tokenize, &apos;open&apos;, open)(__file__);code=f.read().replace(&apos;\r\n&apos;, &apos;\n&apos;);f.close();exec(compile(code, __file__, &apos;exec&apos;))&quot; install --record /tmp/pip-SqelGU-record/install-record.txt --single-version-externally-managed --compile&quot; failed with error code 1 in /private/tmp/pip-build-7AHn_4/pycur</span><br></pre></td></tr></table></figure></p>
+<p>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pycurl -i https://pypi.tuna.tsinghua.edu.cn/simple --user</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/" data-id="cjcss2l7500007x9kccibwsdi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mac下安装pyaudio" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/24/mac下安装pyaudio/" class="article-date">
@@ -98,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjcsij51c00014u9kqs37mbli" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjcss2l7f00037x9k4vp1qw4o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -186,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/第一篇测试/" data-id="cjcsij51h00024u9kp7aa7f05" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/11/第一篇测试/" data-id="cjcss2l7d00027x9knq1zw4nv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -231,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjcsij51700004u9ky2z7nutt" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjcss2l7a00017x9k1lr4hh0c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,6 +308,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/24/MAC下安装pycurl解决办法/">MAC下安装pycurl解决办法</a>
+          </li>
         
           <li>
             <a href="/2018/01/24/mac下安装pyaudio/">mac下安装pyaudio</a>
