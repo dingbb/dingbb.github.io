@@ -5,18 +5,19 @@
   
 
   
-  <title>怪叔叔的博客</title>
+  <title>部署私有云owncloud | 怪叔叔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="温故而知新">
-<meta property="og:type" content="website">
-<meta property="og:title" content="怪叔叔的博客">
-<meta property="og:url" content="http://dingbingbing.top/index.html">
+  <meta name="description" content="###前言之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。 ###环境需求操作系统：centos7 最新小安装即可（关闭selinx和防火墙）应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3备注: 最好是全新干净的系统部署。如果部署请卸载对应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部署私有云owncloud">
+<meta property="og:url" content="http://dingbingbing.top/2018/03/13/部署私有云owncloud/index.html">
 <meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="温故而知新">
+<meta property="og:description" content="###前言之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。 ###环境需求操作系统：centos7 最新小安装即可（关闭selinx和防火墙）应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3备注: 最好是全新干净的系统部署。如果部署请卸载对应">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-13T09:39:35.537Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="怪叔叔的博客">
-<meta name="twitter:description" content="温故而知新">
+<meta name="twitter:title" content="部署私有云owncloud">
+<meta name="twitter:description" content="###前言之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。 ###环境需求操作系统：centos7 最新小安装即可（关闭selinx和防火墙）应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3备注: 最好是全新干净的系统部署。如果部署请卸载对应">
   
     <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
   
@@ -67,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-部署私有云owncloud" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-部署私有云owncloud" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/13/部署私有云owncloud/" class="article-date">
   <time datetime="2018-03-13T08:46:59.000Z" itemprop="datePublished">2018-03-13</time>
@@ -82,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/部署私有云owncloud/">部署私有云owncloud</a>
+    <h1 class="article-title" itemprop="name">
+      部署私有云owncloud
     </h1>
   
 
@@ -127,205 +126,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-MAC下安装pycurl解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/MAC下安装pycurl解决办法/" class="article-date">
-  <time datetime="2018-01-24T07:39:17.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/MAC下安装pycurl解决办法/">MAC下安装pycurl解决办法</a>
-    </h1>
+    <a href="/2018/01/24/MAC下安装pycurl解决办法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MAC下安装pycurl解决办法</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>sudo pip install pycurl报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  src/pycurl.h:185:5: warning: &quot;libcurl was compiled with SSL support, but configure could not determine which &quot;      &quot;library was used; thus no SSL crypto locking callbacks will be set, which may &quot;      &quot;cause random crashes on SSL requests&quot; [-W#warnings]</span><br><span class="line">    #   warning \</span><br><span class="line">        ^</span><br><span class="line">    1 warning generated.</span><br><span class="line">    cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. build/temp.macosx-10.13-intel-2.7/src/docstrings.o build/temp.macosx-10.13-intel-2.7/src/easy.o build/temp.macosx-10.13-intel-2.7/src/module.o build/temp.macosx-10.13-intel-2.7/src/multi.o build/temp.macosx-10.13-intel-2.7/src/oscompat.o build/temp.macosx-10.13-intel-2.7/src/pythoncompat.o build/temp.macosx-10.13-intel-2.7/src/share.o build/temp.macosx-10.13-intel-2.7/src/stringcompat.o build/temp.macosx-10.13-intel-2.7/src/threadsupport.o -lcurl -o build/lib.macosx-10.13-intel-2.7/pycurl.so</span><br><span class="line">    running install_lib</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/pycurl.so -&gt; /Library/Python/2.7/site-packages</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/curl/__init__.py -&gt; /Library/Python/2.7/site-packages/curl</span><br><span class="line">    byte-compiling /Library/Python/2.7/site-packages/curl/__init__.py to __init__.pyc</span><br><span class="line">    running install_data</span><br><span class="line">    creating /System/Library/Frameworks/Python.framework/Versions/2.7/share</span><br><span class="line">    error: could not create &apos;/System/Library/Frameworks/Python.framework/Versions/2.7/share&apos;: Operation not permitted</span><br><span class="line">    </span><br><span class="line">    ----------------------------------------</span><br><span class="line">Command &quot;/usr/bin/python -u -c &quot;import setuptools, tokenize;__file__=&apos;/private/tmp/pip-build-7AHn_4/pycurl/setup.py&apos;;f=getattr(tokenize, &apos;open&apos;, open)(__file__);code=f.read().replace(&apos;\r\n&apos;, &apos;\n&apos;);f.close();exec(compile(code, __file__, &apos;exec&apos;))&quot; install --record /tmp/pip-SqelGU-record/install-record.txt --single-version-externally-managed --compile&quot; failed with error code 1 in /private/tmp/pip-build-7AHn_4/pycur</span><br></pre></td></tr></table></figure></p>
-<p>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pycurl -i https://pypi.tuna.tsinghua.edu.cn/simple --user</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/" data-id="cjepo2sy30000g39kq7zdn774" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-mac下安装pyaudio" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/mac下安装pyaudio/" class="article-date">
-  <time datetime="2018-01-24T03:20:52.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/mac下安装pyaudio/">mac下安装pyaudio</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install  ＃安装xcode, 已经装好的的话，执行的时候会提示</span><br><span class="line">brew remove portaudio  ＃先卸载</span><br><span class="line">brew install portaudio ＃重新安装</span><br><span class="line">sudo pip install pyaudio </span><br><span class="line">－－OK</span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="https://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3" target="_blank" rel="noopener">https://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjepo2syc0002g39k1u13hxgx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-第一篇测试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/第一篇测试/" class="article-date">
-  <time datetime="2018-01-11T09:24:56.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/第一篇测试/">通过hexo和github部署个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如何通过hexo和github部署个人博客</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>   做运维相关工作已经4年，最近琢磨着建立一个自己的知识库，用博客的形式，记录下，自己工作中的点滴。<br>希望能在这个过程中，不断的总结，思考。也希望自己写的文章能帮助到大家。经过网上找资料。最终选择了<br>hexo与github的方式。<br><a href="https://github.com/hexojs/hexo" target="_blank" rel="noopener">hexo</a>是一款基于Node.js的静态博客框架,本文是再mac部署的。<br>希望能帮助到大家。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><ol>
-<li><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>官网下载相应平台的<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">最新版本</a></p>
-</li>
-<li><p>安装node,在终端输入以下命令<br><pre><code>brew install node</code></pre><br>如果没有安装brew请参考<a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="noopener">mac上安装brew</a></p>
-</li>
-<li>验证是否安装成功<br><pre><code>node -v</code></pre><br>出现版本号如 v9.3.0 代表安装成功。<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4></li>
-<li>通过brew安装<pre><code>brew install git</code></pre></li>
-<li>下载安装。<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载地址</a> <h4 id="申请Github账号"><a href="#申请Github账号" class="headerlink" title="申请Github账号"></a>申请Github账号</h4></li>
-<li>登陆github申请账号</li>
-</ol>
-<p><a href="https://github.com" target="_blank" rel="noopener">https://github.com</a></p>
-<ol>
-<li>创建一个新的<br><a><img src="/img/WX20180120-1746512x.png" height="64px"></a></li>
-</ol>
-<h2 id="Tables-and-alignment"><a href="#Tables-and-alignment" class="headerlink" title="Tables and alignment"></a>Tables and alignment</h2><table>
-<thead>
-<tr>
-<th>First Header</th>
-<th>Second Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Content from cell 1</td>
-<td>Content from cell 2</td>
-</tr>
-<tr>
-<td>Content in the first column</td>
-<td>Content in the second column</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Markdown-Plus"><a href="#Markdown-Plus" class="headerlink" title="Markdown Plus"></a>Markdown Plus</h3><p><a href="http://tylingsoft.com/markdown-plus/" target="_blank" rel="noopener"><img src="http://tylingsoft.com/img/mdp/icon.png" height="64px"></a><br><a href="http://tylingsoft.com/markdown-plus/" target="_blank" rel="noopener">Markdown Plus</a> is available for both OS X and Windows. You get every feature of the web version plus lots of advanced features.</p>
-<h3 id="医院自动发送表单监控报警"><a href="#医院自动发送表单监控报警" class="headerlink" title="医院自动发送表单监控报警"></a>医院自动发送表单监控报警</h3><p><a href="https://www.lanniuh.com/hug-web/listDteHosp/" target="_blank" rel="noopener"><img src="http://dingbingbing.top/img/alertred.png" height="64px"></a><br><a href="https://www.lanniuh.com/hug-web/listDteHosp" target="_blank" rel="noopener">登陆云端查看jh-hos是否连接成功</a>  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/第一篇测试/" data-id="cjepo2sye0003g39kbxaw9qm6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/hello-world/" class="article-date">
-  <time datetime="2018-01-11T08:35:45.403Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjepo2sy90001g39kob3xpuym" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
