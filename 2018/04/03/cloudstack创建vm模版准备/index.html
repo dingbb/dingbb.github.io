@@ -5,19 +5,19 @@
   
 
   
-  <title>mac下安装pyaudio | 怪叔叔的博客</title>
+  <title>cloudstack创建vm模版准备 | 怪叔叔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="主要步骤： 12345xcode-select --install  ＃安装xcode, 已经装好的的话，执行的时候会提示brew remove portaudio  ＃先卸载brew install portaudio ＃重新安装sudo pip install pyaudio －－OK 参考：https://stackoverflow.com/questions/33851379/pyaudi">
+  <meta name="description" content="清除udev的部分规则这一步会移除你的主模板的特殊信息，如网络MAC地址，租约信息和CD块设备，这个文件会在下次启动时自动生成。12rm -f /etc/udev/rules.d/70*rm -f /var/lib/dhclient/* 移除SSH Keys这步是为了确认所有要作为模板的VMs的SSH Keys都不相同，否则这样会降低虚拟机的安全性.1rm -f /etc/ssh/*key* 清除">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac下安装pyaudio">
-<meta property="og:url" content="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/index.html">
+<meta property="og:title" content="cloudstack创建vm模版准备">
+<meta property="og:url" content="http://dingbingbing.top/2018/04/03/cloudstack创建vm模版准备/index.html">
 <meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="主要步骤： 12345xcode-select --install  ＃安装xcode, 已经装好的的话，执行的时候会提示brew remove portaudio  ＃先卸载brew install portaudio ＃重新安装sudo pip install pyaudio －－OK 参考：https://stackoverflow.com/questions/33851379/pyaudi">
+<meta property="og:description" content="清除udev的部分规则这一步会移除你的主模板的特殊信息，如网络MAC地址，租约信息和CD块设备，这个文件会在下次启动时自动生成。12rm -f /etc/udev/rules.d/70*rm -f /var/lib/dhclient/* 移除SSH Keys这步是为了确认所有要作为模板的VMs的SSH Keys都不相同，否则这样会降低虚拟机的安全性.1rm -f /etc/ssh/*key* 清除">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-24T03:31:19.950Z">
+<meta property="og:updated_time" content="2018-04-03T08:16:21.078Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac下安装pyaudio">
-<meta name="twitter:description" content="主要步骤： 12345xcode-select --install  ＃安装xcode, 已经装好的的话，执行的时候会提示brew remove portaudio  ＃先卸载brew install portaudio ＃重新安装sudo pip install pyaudio －－OK 参考：https://stackoverflow.com/questions/33851379/pyaudi">
+<meta name="twitter:title" content="cloudstack创建vm模版准备">
+<meta name="twitter:description" content="清除udev的部分规则这一步会移除你的主模板的特殊信息，如网络MAC地址，租约信息和CD块设备，这个文件会在下次启动时自动生成。12rm -f /etc/udev/rules.d/70*rm -f /var/lib/dhclient/* 移除SSH Keys这步是为了确认所有要作为模板的VMs的SSH Keys都不相同，否则这样会降低虚拟机的安全性.1rm -f /etc/ssh/*key* 清除">
   
     <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
   
@@ -68,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mac下安装pyaudio" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-cloudstack创建vm模版准备" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/01/24/mac下安装pyaudio/" class="article-date">
-  <time datetime="2018-01-24T03:20:52.000Z" itemprop="datePublished">2018-01-24</time>
+    <a href="/2018/04/03/cloudstack创建vm模版准备/" class="article-date">
+  <time datetime="2018-04-03T08:10:42.000Z" itemprop="datePublished">2018-04-03</time>
 </a>
     
   </div>
@@ -82,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mac下安装pyaudio
+      cloudstack创建vm模版准备
     </h1>
   
 
@@ -90,14 +90,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>主要步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install  ＃安装xcode, 已经装好的的话，执行的时候会提示</span><br><span class="line">brew remove portaudio  ＃先卸载</span><br><span class="line">brew install portaudio ＃重新安装</span><br><span class="line">sudo pip install pyaudio </span><br><span class="line">－－OK</span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="https://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3" target="_blank" rel="noopener">https://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3</a></p>
-
+        <h5 id="清除udev的部分规则"><a href="#清除udev的部分规则" class="headerlink" title="清除udev的部分规则"></a>清除udev的部分规则</h5><p>这一步会移除你的主模板的特殊信息，如网络MAC地址，租约信息和CD块设备，这个文件会在下次启动时自动生成。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/udev/rules.d/70*</span><br><span class="line">rm -f /var/lib/dhclient/*</span><br></pre></td></tr></table></figure></p>
+<h5 id="移除SSH-Keys"><a href="#移除SSH-Keys" class="headerlink" title="移除SSH Keys"></a>移除SSH Keys</h5><p>这步是为了确认所有要作为模板的VMs的SSH Keys都不相同，否则这样会降低虚拟机的安全性.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -f /etc/ssh/*key*</span><br></pre></td></tr></table></figure></p>
+<h5 id="清除日志文件"><a href="#清除日志文件" class="headerlink" title="清除日志文件"></a>清除日志文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /dev/null &gt; /var/log/audit/audit.log 2&gt;/dev/null</span><br><span class="line">cat /dev/null &gt; /var/log/wtmp 2&gt;/dev/null</span><br><span class="line">logrotate -f /etc/logrotate.conf 2&gt;/dev/null</span><br><span class="line">rm -f /var/log/*-* /var/log/*.gz 2&gt;/dev/null</span><br></pre></td></tr></table></figure>
+<h5 id="清除用户历史"><a href="#清除用户历史" class="headerlink" title="清除用户历史"></a>清除用户历史</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">history -c</span><br><span class="line">unset HISTFILE</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjfje3pax0004p49kmodpsuec" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/03/cloudstack创建vm模版准备/" data-id="cjfje3pau0002p49ks2z58ffe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -106,19 +106,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/01/24/MAC下安装pycurl解决办法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MAC下安装pycurl解决办法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/01/11/第一篇测试/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/28/centos6安装vsftp/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">通过hexo和github部署个人博客</div>
+      <div class="article-nav-title">centos6安装vsftp</div>
     </a>
   
 </nav>
