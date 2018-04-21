@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>centos7部署openldap | 怪叔叔的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言为了公司统一认证。实验环境centos7.2 + ldap2.4 一、初始化环境1. 拉取镜像1docker pull centos:7.2.1511 2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not per">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7部署openldap">
+<meta property="og:url" content="http://dingbingbing.top/2018/04/20/centos7部署openldap/index.html">
+<meta property="og:site_name" content="怪叔叔的博客">
+<meta property="og:description" content="前言为了公司统一认证。实验环境centos7.2 + ldap2.4 一、初始化环境1. 拉取镜像1docker pull centos:7.2.1511 2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not per">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://dingbingbing.top/img/WX20180421-155221@2x.png">
+<meta property="og:updated_time" content="2018-04-21T07:55:11.003Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos7部署openldap">
+<meta name="twitter:description" content="前言为了公司统一认证。实验环境centos7.2 + ldap2.4 一、初始化环境1. 拉取镜像1docker pull centos:7.2.1511 2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not per">
+<meta name="twitter:image" content="http://dingbingbing.top/img/WX20180421-155221@2x.png">
+  
+    <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">怪叔叔的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">攀峰之高险，岂有崖巅。搏海之明辉，何来彼岸。前进不止，奋斗不息。</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://dingbingbing.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-centos7部署openldap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/centos7部署openldap/" class="article-date">
+  <time datetime="2018-04-20T11:45:58.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      centos7部署openldap
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>为了公司统一认证。实验环境centos7.2 + ldap2.4</p>
+<h4 id="一、初始化环境"><a href="#一、初始化环境" class="headerlink" title="一、初始化环境"></a>一、初始化环境</h4><h6 id="1-拉取镜像"><a href="#1-拉取镜像" class="headerlink" title="1. 拉取镜像"></a>1. 拉取镜像</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos:7.2.1511</span><br></pre></td></tr></table></figure>
+<h6 id="2-启动镜像-这里比较必须加–privileged-true-usr-sbin-init-要不然无法使用systemctl命令-报错如括号内（Failed-to-get-D-Bus-connection-Operation-not-permitted）"><a href="#2-启动镜像-这里比较必须加–privileged-true-usr-sbin-init-要不然无法使用systemctl命令-报错如括号内（Failed-to-get-D-Bus-connection-Operation-not-permitted）" class="headerlink" title="2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not permitted）"></a>2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not permitted）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i -t  centos:7.2.1511 --privileged=true /usr/sbin/init</span><br></pre></td></tr></table></figure>
+<h6 id="3-同步docker容器时间"><a href="#3-同步docker容器时间" class="headerlink" title="3. 同步docker容器时间"></a>3. 同步docker容器时间</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /etc/localtime 112e8dae5777:/etc/localtime</span><br></pre></td></tr></table></figure>
+<h6 id="4-关闭selinux和防火墙"><a href="#4-关闭selinux和防火墙" class="headerlink" title="4. 关闭selinux和防火墙"></a>4. 关闭selinux和防火墙</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &apos;/SELINUX/s/enforcing/disabled/&apos; /etc/selinux/config &amp;&amp; setenforce 0 &amp;&amp; systemctl disable firewalld.service &amp;&amp; systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<h4 id="二、安装openldap"><a href="#二、安装openldap" class="headerlink" title="二、安装openldap"></a>二、安装openldap</h4><p>yum安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openldap compat-openldap openldap-clients openldap-servers openldap-servers-sql openldap-devel migrationtools</span><br></pre></td></tr></table></figure></p>
+<p>检查是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@79db5acb0034 /]# slapd -VV</span><br><span class="line">@(#) $OpenLDAP: slapd 2.4.44 (Aug  4 2017 14:23:27) $</span><br><span class="line">	mockbuild@c1bm.rdu2.centos.org:/builddir/build/BUILD/openldap-2.4.44/openldap-2.4.44/servers/slapd</span><br><span class="line"></span><br><span class="line">[root@79db5acb0034 /]#</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、配置openldap"><a href="#三、配置openldap" class="headerlink" title="三、配置openldap"></a>三、配置openldap</h4><h6 id="1-配置openldap管理员密码"><a href="#1-配置openldap管理员密码" class="headerlink" title="1. 配置openldap管理员密码"></a>1. 配置openldap管理员密码</h6><p>slappasswd -s 123456<br>备注：会生产一个{SSHA}xxx 之后会用到</p>
+<h6 id="2-修改olcDatabase-2-hdb-ldif文件"><a href="#2-修改olcDatabase-2-hdb-ldif文件" class="headerlink" title="2. 修改olcDatabase={2}hdb.ldif文件"></a>2. 修改olcDatabase={2}hdb.ldif文件</h6><p>vim /etc/openldap/slapd.d/cn\=config/olcDatabase\={2}hdb.ldif<br><img src="http://dingbingbing.top/img/WX20180421-155221@2x.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/04/20/centos7部署openldap/" data-id="cjg93aosa0002o89kao0fk046" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/09/cloudstack初始化测试环境数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">cloudstack初始化测试环境数据</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/centos7部署openldap/">centos7部署openldap</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/09/cloudstack初始化测试环境数据/">cloudstack初始化测试环境数据</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/03/cloudstack创建vm模版准备/">cloudstack创建vm模版准备</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/28/centos6安装vsftp/">centos6安装vsftp</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Ice Ding<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

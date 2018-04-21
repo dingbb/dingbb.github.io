@@ -5,18 +5,19 @@
   
 
   
-  <title>归档: 2018/4 | 怪叔叔的博客</title>
+  <title>怪叔叔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="温故而知新">
-<meta property="og:type" content="website">
+  <meta name="description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
+<meta property="og:type" content="article">
 <meta property="og:title" content="怪叔叔的博客">
-<meta property="og:url" content="http://dingbingbing.top/archives/2018/04/index.html">
+<meta property="og:url" content="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/index.html">
 <meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="温故而知新">
+<meta property="og:description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-20T11:46:52.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怪叔叔的博客">
-<meta name="twitter:description" content="温故而知新">
+<meta name="twitter:description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
   
     <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
   
@@ -67,91 +68,48 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" class="archive-article-date">
-  <time datetime="2018-04-20T11:46:52.307Z" itemprop="datePublished">4月 20</time>
+        <section id="main"><article id="post-Ubuntu14-04下的LDAP的搭建与配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" class="article-date">
+  <time datetime="2018-04-20T11:46:52.307Z" itemprop="datePublished">2018-04-20</time>
 </a>
-      
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/20/centos7部署openldap/" class="archive-article-date">
-  <time datetime="2018-04-20T11:45:58.000Z" itemprop="datePublished">4月 20</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/20/centos7部署openldap/">centos7部署openldap</a>
-    </h1>
-  
+        <hr>
+<p>title: Ubuntu14.04下的LDAP的搭建与配置<br>date: 2018-04-19 10:02:26<br>tags:<br>-当你创建phpLdapAdmin用户时会出现以下报错：</p>
+<p>Error trying to get a non-existant value (appearance,password_hash)<br>跟踪错误提示的路径</p>
+<p>File    /usr/share/phpldapadmin/lib/functions.php (444)<br>    Function    error (a:5:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/ds.php (81)<br>    Function    debug_dump_backtrace (a:2:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php (2469)<br>    Function    getValue (a:2:{i:0;s:10:”appearance”;i:1;s:13:”password_hash…)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php ()<br>    Function    drawDefaultHelperPasswordAttribute (a:2:{i:0;O:17:”PasswordAttribute”:34:{s:4:”name”;s…)<br>File    /usr/share/phpldapadmin/lib/Visitor.php (58)<br>    Function    call_user_func_array (a:2:{i:0;a:2:{i:0;O:14:”TemplateRender”:9:{s:24:”…)<br>…<br>这是PHP5.5的错误，为了解决这个问题需要修改/usr/share/phpldapadmin/lib/TemplateRender.php文件。</p>
+<p>打开/usr/share/phpldapadmin/lib/TemplateRender.php文件编辑2469行更改：</p>
+<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash’);<br>更改为</p>
+<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash_custom’);<br>注意’password_hash’已改为’password_hash_custom’。现在，您应该能够添加用户并正确设置密码。<br><a href="http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--" target="_blank" rel="noopener">http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--</a></p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/09/cloudstack初始化测试环境数据/" class="archive-article-date">
-  <time datetime="2018-04-09T06:08:42.000Z" itemprop="datePublished">4月 9</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/09/cloudstack初始化测试环境数据/">cloudstack初始化测试环境数据</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/03/cloudstack创建vm模版准备/" class="archive-article-date">
-  <time datetime="2018-04-03T08:10:42.000Z" itemprop="datePublished">4月 3</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" data-id="cjg93aos70001o89kw81l9n47" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/03/cloudstack创建vm模版准备/">cloudstack创建vm模版准备</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/20/centos7部署openldap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">centos7部署openldap</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         

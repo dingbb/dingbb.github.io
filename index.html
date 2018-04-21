@@ -69,6 +69,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Ubuntu14-04下的LDAP的搭建与配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" class="article-date">
+  <time datetime="2018-04-20T11:46:52.307Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>title: Ubuntu14.04下的LDAP的搭建与配置<br>date: 2018-04-19 10:02:26<br>tags:<br>-当你创建phpLdapAdmin用户时会出现以下报错：</p>
+<p>Error trying to get a non-existant value (appearance,password_hash)<br>跟踪错误提示的路径</p>
+<p>File    /usr/share/phpldapadmin/lib/functions.php (444)<br>    Function    error (a:5:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/ds.php (81)<br>    Function    debug_dump_backtrace (a:2:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php (2469)<br>    Function    getValue (a:2:{i:0;s:10:”appearance”;i:1;s:13:”password_hash…)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php ()<br>    Function    drawDefaultHelperPasswordAttribute (a:2:{i:0;O:17:”PasswordAttribute”:34:{s:4:”name”;s…)<br>File    /usr/share/phpldapadmin/lib/Visitor.php (58)<br>    Function    call_user_func_array (a:2:{i:0;a:2:{i:0;O:14:”TemplateRender”:9:{s:24:”…)<br>…<br>这是PHP5.5的错误，为了解决这个问题需要修改/usr/share/phpldapadmin/lib/TemplateRender.php文件。</p>
+<p>打开/usr/share/phpldapadmin/lib/TemplateRender.php文件编辑2469行更改：</p>
+<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash’);<br>更改为</p>
+<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash_custom’);<br>注意’password_hash’已改为’password_hash_custom’。现在，您应该能够添加用户并正确设置密码。<br><a href="http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--" target="_blank" rel="noopener">http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" data-id="cjg93aos70001o89kw81l9n47" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos7部署openldap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/centos7部署openldap/" class="article-date">
+  <time datetime="2018-04-20T11:45:58.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/20/centos7部署openldap/">centos7部署openldap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>为了公司统一认证。实验环境centos7.2 + ldap2.4</p>
+<h4 id="一、初始化环境"><a href="#一、初始化环境" class="headerlink" title="一、初始化环境"></a>一、初始化环境</h4><h6 id="1-拉取镜像"><a href="#1-拉取镜像" class="headerlink" title="1. 拉取镜像"></a>1. 拉取镜像</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos:7.2.1511</span><br></pre></td></tr></table></figure>
+<h6 id="2-启动镜像-这里比较必须加–privileged-true-usr-sbin-init-要不然无法使用systemctl命令-报错如括号内（Failed-to-get-D-Bus-connection-Operation-not-permitted）"><a href="#2-启动镜像-这里比较必须加–privileged-true-usr-sbin-init-要不然无法使用systemctl命令-报错如括号内（Failed-to-get-D-Bus-connection-Operation-not-permitted）" class="headerlink" title="2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not permitted）"></a>2. 启动镜像 这里比较必须加–privileged=true /usr/sbin/init 要不然无法使用systemctl命令 报错如括号内（Failed to get D-Bus connection: Operation not permitted）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i -t  centos:7.2.1511 --privileged=true /usr/sbin/init</span><br></pre></td></tr></table></figure>
+<h6 id="3-同步docker容器时间"><a href="#3-同步docker容器时间" class="headerlink" title="3. 同步docker容器时间"></a>3. 同步docker容器时间</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /etc/localtime 112e8dae5777:/etc/localtime</span><br></pre></td></tr></table></figure>
+<h6 id="4-关闭selinux和防火墙"><a href="#4-关闭selinux和防火墙" class="headerlink" title="4. 关闭selinux和防火墙"></a>4. 关闭selinux和防火墙</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &apos;/SELINUX/s/enforcing/disabled/&apos; /etc/selinux/config &amp;&amp; setenforce 0 &amp;&amp; systemctl disable firewalld.service &amp;&amp; systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<h4 id="二、安装openldap"><a href="#二、安装openldap" class="headerlink" title="二、安装openldap"></a>二、安装openldap</h4><p>yum安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install openldap compat-openldap openldap-clients openldap-servers openldap-servers-sql openldap-devel migrationtools</span><br></pre></td></tr></table></figure></p>
+<p>检查是否安装成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@79db5acb0034 /]# slapd -VV</span><br><span class="line">@(#) $OpenLDAP: slapd 2.4.44 (Aug  4 2017 14:23:27) $</span><br><span class="line">	mockbuild@c1bm.rdu2.centos.org:/builddir/build/BUILD/openldap-2.4.44/openldap-2.4.44/servers/slapd</span><br><span class="line"></span><br><span class="line">[root@79db5acb0034 /]#</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、配置openldap"><a href="#三、配置openldap" class="headerlink" title="三、配置openldap"></a>三、配置openldap</h4><h6 id="1-配置openldap管理员密码"><a href="#1-配置openldap管理员密码" class="headerlink" title="1. 配置openldap管理员密码"></a>1. 配置openldap管理员密码</h6><p>slappasswd -s 123456<br>备注：会生产一个{SSHA}xxx 之后会用到</p>
+<h6 id="2-修改olcDatabase-2-hdb-ldif文件"><a href="#2-修改olcDatabase-2-hdb-ldif文件" class="headerlink" title="2. 修改olcDatabase={2}hdb.ldif文件"></a>2. 修改olcDatabase={2}hdb.ldif文件</h6><p>vim /etc/openldap/slapd.d/cn\=config/olcDatabase\={2}hdb.ldif<br><img src="http://dingbingbing.top/img/WX20180421-155221@2x.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/04/20/centos7部署openldap/" data-id="cjg93aosa0002o89kao0fk046" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-cloudstack初始化测试环境数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/09/cloudstack初始化测试环境数据/" class="article-date">
@@ -108,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/09/cloudstack初始化测试环境数据/" data-id="cjg5uphmh0005mu9kl20lohz6" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/09/cloudstack初始化测试环境数据/" data-id="cjg93aosj0009o89kcaqlusq5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -147,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/03/cloudstack创建vm模版准备/" data-id="cjg5uphm50000mu9klsn8qo0q" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/03/cloudstack创建vm模版准备/" data-id="cjg93aosb0003o89kdx61vo53" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +268,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/03/28/centos6安装vsftp/" data-id="cjg5uphma0001mu9k01labwwn" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/03/28/centos6安装vsftp/" data-id="cjg93aosd0004o89k5nrbuza6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +329,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/03/13/部署私有云owncloud/" data-id="cjg5uphmj0007mu9kzf7ni86d" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/03/13/部署私有云owncloud/" data-id="cjg93aosf0006o89kaxvbtmhb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +367,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/" data-id="cjg5uphme0003mu9kbg5rf26t" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/" data-id="cjg93aos20000o89k6y29n2f8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +406,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjg5uphmi0006mu9kp14g913b" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjg93aosi0008o89k6abn9q7q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +478,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/第一篇测试/" data-id="cjg5uphmf0004mu9k63lvnnib" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/11/第一篇测试/" data-id="cjg93aosh0007o89kenxmk0p2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,7 +523,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjg5uphmd0002mu9ktxamqyv1" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjg93aose0005o89kk9n113mt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -486,6 +564,14 @@ chkconfig vsftpd on</code></p>
       <ul>
         
           <li>
+            <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/centos7部署openldap/">centos7部署openldap</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/09/cloudstack初始化测试环境数据/">cloudstack初始化测试环境数据</a>
           </li>
         
@@ -495,14 +581,6 @@ chkconfig vsftpd on</code></p>
         
           <li>
             <a href="/2018/03/28/centos6安装vsftp/">centos6安装vsftp</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/13/部署私有云owncloud/">部署私有云owncloud</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/24/MAC下安装pycurl解决办法/">MAC下安装pycurl解决办法</a>
           </li>
         
       </ul>
