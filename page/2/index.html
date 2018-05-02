@@ -7,17 +7,16 @@
   
   <title>怪叔叔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
-<meta property="og:type" content="article">
+  <meta name="description" content="温故而知新">
+<meta property="og:type" content="website">
 <meta property="og:title" content="怪叔叔的博客">
-<meta property="og:url" content="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/index.html">
+<meta property="og:url" content="http://dingbingbing.top/page/2/index.html">
 <meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
+<meta property="og:description" content="温故而知新">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T11:46:52.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怪叔叔的博客">
-<meta name="twitter:description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
+<meta name="twitter:description" content="温故而知新">
   
     <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
   
@@ -68,57 +67,59 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Ubuntu14-04下的LDAP的搭建与配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" class="article-date">
-  <time datetime="2018-04-20T11:46:52.307Z" itemprop="datePublished">2018-04-20</time>
+    <a href="/2018/01/11/hello-world/" class="article-date">
+  <time datetime="2018-01-11T08:35:45.403Z" itemprop="datePublished">2018-01-11</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/11/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: Ubuntu14.04下的LDAP的搭建与配置<br>date: 2018-04-19 10:02:26<br>tags:<br>-当你创建phpLdapAdmin用户时会出现以下报错：</p>
-<p>Error trying to get a non-existant value (appearance,password_hash)<br>跟踪错误提示的路径</p>
-<p>File    /usr/share/phpldapadmin/lib/functions.php (444)<br>    Function    error (a:5:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/ds.php (81)<br>    Function    debug_dump_backtrace (a:2:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php (2469)<br>    Function    getValue (a:2:{i:0;s:10:”appearance”;i:1;s:13:”password_hash…)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php ()<br>    Function    drawDefaultHelperPasswordAttribute (a:2:{i:0;O:17:”PasswordAttribute”:34:{s:4:”name”;s…)<br>File    /usr/share/phpldapadmin/lib/Visitor.php (58)<br>    Function    call_user_func_array (a:2:{i:0;a:2:{i:0;O:14:”TemplateRender”:9:{s:24:”…)<br>…<br>这是PHP5.5的错误，为了解决这个问题需要修改/usr/share/phpldapadmin/lib/TemplateRender.php文件。</p>
-<p>打开/usr/share/phpldapadmin/lib/TemplateRender.php文件编辑2469行更改：</p>
-<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash’);<br>更改为</p>
-<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash_custom’);<br>注意’password_hash’已改为’password_hash_custom’。现在，您应该能够添加用户并正确设置密码。<br><a href="http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--" target="_blank" rel="noopener">http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--</a></p>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" data-id="cjgovuag400047v9kboiprsf3" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjgovuag700077v9kj89meemz" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2018/04/25/Anaconda安装以及包管理工具conda介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Anaconda安装以及包管理工具conda介绍
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/04/20/centos7部署openldap/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">centos7部署openldap</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 </section>
         

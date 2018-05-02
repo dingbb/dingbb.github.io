@@ -5,19 +5,19 @@
   
 
   
-  <title>怪叔叔的博客</title>
+  <title>Anaconda安装以及包管理工具conda介绍 | 怪叔叔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
+  <meta name="description" content="Anaconda简介anaconda指的是一个开源的Python发行版本，其包含了conda、Python等180多个科学包及其依赖项。支持linux、mac、Windows提供了包管理与环境管理功能。可以很方便解决多版本python并存、切换以及第三方包安装问题。Anaconda利用工具/命令conda来进行package和environment的管理。 中科大镜像安装https://mirro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="怪叔叔的博客">
-<meta property="og:url" content="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/index.html">
+<meta property="og:title" content="Anaconda安装以及包管理工具conda介绍">
+<meta property="og:url" content="http://dingbingbing.top/2018/04/25/Anaconda安装以及包管理工具conda介绍/index.html">
 <meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
+<meta property="og:description" content="Anaconda简介anaconda指的是一个开源的Python发行版本，其包含了conda、Python等180多个科学包及其依赖项。支持linux、mac、Windows提供了包管理与环境管理功能。可以很方便解决多版本python并存、切换以及第三方包安装问题。Anaconda利用工具/命令conda来进行package和environment的管理。 中科大镜像安装https://mirro">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T11:46:52.309Z">
+<meta property="og:updated_time" content="2018-04-25T12:24:43.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="怪叔叔的博客">
-<meta name="twitter:description" content="title: Ubuntu14.04下的LDAP的搭建与配置date: 2018-04-19 10:02:26tags:-当你创建phpLdapAdmin用户时会出现以下报错： Error trying to get a non-existant value (appearance,password_hash)跟踪错误提示的路径 File    /usr/share/phpldapadmin/l">
+<meta name="twitter:title" content="Anaconda安装以及包管理工具conda介绍">
+<meta name="twitter:description" content="Anaconda简介anaconda指的是一个开源的Python发行版本，其包含了conda、Python等180多个科学包及其依赖项。支持linux、mac、Windows提供了包管理与环境管理功能。可以很方便解决多版本python并存、切换以及第三方包安装问题。Anaconda利用工具/命令conda来进行package和environment的管理。 中科大镜像安装https://mirro">
   
     <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
   
@@ -68,30 +68,36 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Ubuntu14-04下的LDAP的搭建与配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Anaconda安装以及包管理工具conda介绍" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" class="article-date">
-  <time datetime="2018-04-20T11:46:52.307Z" itemprop="datePublished">2018-04-20</time>
+    <a href="/2018/04/25/Anaconda安装以及包管理工具conda介绍/" class="article-date">
+  <time datetime="2018-04-25T12:04:36.000Z" itemprop="datePublished">2018-04-25</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Anaconda安装以及包管理工具conda介绍
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: Ubuntu14.04下的LDAP的搭建与配置<br>date: 2018-04-19 10:02:26<br>tags:<br>-当你创建phpLdapAdmin用户时会出现以下报错：</p>
-<p>Error trying to get a non-existant value (appearance,password_hash)<br>跟踪错误提示的路径</p>
-<p>File    /usr/share/phpldapadmin/lib/functions.php (444)<br>    Function    error (a:5:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/ds.php (81)<br>    Function    debug_dump_backtrace (a:2:{i:0;s:67:”Error trying to get a non-existant …)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php (2469)<br>    Function    getValue (a:2:{i:0;s:10:”appearance”;i:1;s:13:”password_hash…)<br>File    /usr/share/phpldapadmin/lib/TemplateRender.php ()<br>    Function    drawDefaultHelperPasswordAttribute (a:2:{i:0;O:17:”PasswordAttribute”:34:{s:4:”name”;s…)<br>File    /usr/share/phpldapadmin/lib/Visitor.php (58)<br>    Function    call_user_func_array (a:2:{i:0;a:2:{i:0;O:14:”TemplateRender”:9:{s:24:”…)<br>…<br>这是PHP5.5的错误，为了解决这个问题需要修改/usr/share/phpldapadmin/lib/TemplateRender.php文件。</p>
-<p>打开/usr/share/phpldapadmin/lib/TemplateRender.php文件编辑2469行更改：</p>
-<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash’);<br>更改为</p>
-<p>$default = $this-&gt;getServer()-&gt;getValue(‘appearance’,’password_hash_custom’);<br>注意’password_hash’已改为’password_hash_custom’。现在，您应该能够添加用户并正确设置密码。<br><a href="http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--" target="_blank" rel="noopener">http://www.yoelweblog.com/2015/04/error-phpldapadmin-non-existent-value-appearance-password_hash/--</a></p>
+        <h4 id="Anaconda简介"><a href="#Anaconda简介" class="headerlink" title="Anaconda简介"></a>Anaconda简介</h4><p>anaconda指的是一个开源的Python发行版本，其包含了conda、Python等180多个科学包及其依赖项。支持linux、mac、Windows<br>提供了包管理与环境管理功能。可以很方便解决多版本python并存、切换以及第三方包安装问题。Anaconda利用工具/命令conda来进行<br>package和environment的管理。</p>
+<h4 id="中科大镜像安装"><a href="#中科大镜像安装" class="headerlink" title="中科大镜像安装"></a>中科大镜像安装</h4><p><a href="https://mirrors.ustc.edu.cn/anaconda/" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/anaconda/</a><br><a href="https://mirrors.ustc.edu.cn" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn</a><br><a href="http://mirrors.ustc.edu.cn/help/anaconda.html" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/help/anaconda.html</a><br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>下载版本<br><a href="https://mirrors.ustc.edu.cn/anaconda/archive/" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/anaconda/archive/</a><br>这里下载mac版本<br><a href="https://mirrors.ustc.edu.cn/anaconda/archive/Anaconda3-5.1.0-MacOSX-x86_64.sh" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/anaconda/archive/Anaconda3-5.1.0-MacOSX-x86_64.sh</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" data-id="cjgovuag400047v9kboiprsf3" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/25/Anaconda安装以及包管理工具conda介绍/" data-id="cjgovuafv00007v9kuabb8ukn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -100,19 +106,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/04/25/Anaconda安装以及包管理工具conda介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Anaconda安装以及包管理工具conda介绍
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/20/centos7部署openldap/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/20/Ubuntu14-04下的LDAP的搭建与配置/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">centos7部署openldap</div>
+      <div class="article-nav-title"></div>
     </a>
   
 </nav>
