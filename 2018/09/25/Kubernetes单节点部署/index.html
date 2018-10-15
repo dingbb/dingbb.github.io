@@ -5,18 +5,19 @@
   
 
   
-  <title>归档: 2018/1 | 怪叔叔的博客</title>
+  <title>Kubernetes单节点部署 | 怪叔叔的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="温故而知新">
-<meta property="og:type" content="website">
-<meta property="og:title" content="怪叔叔的博客">
-<meta property="og:url" content="http://dingbingbing.top/archives/2018/01/index.html">
+  <meta name="description" content="官方提供了Kubernetes部署的3种方式 minikube  Minikube是一个工具，可以在本地快速部署一个单节点的Kubernetes,不能用于生产环境  官方文档:https://kubernetes.io/docs/setup/minikube/ kubeadm  kubeadm可以快速部署一个kubernetes集群，kubeadm设计目的为新用户开始尝试kubernetes提供一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes单节点部署">
+<meta property="og:url" content="http://dingbingbing.top/2018/09/25/Kubernetes单节点部署/index.html">
 <meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="温故而知新">
+<meta property="og:description" content="官方提供了Kubernetes部署的3种方式 minikube  Minikube是一个工具，可以在本地快速部署一个单节点的Kubernetes,不能用于生产环境  官方文档:https://kubernetes.io/docs/setup/minikube/ kubeadm  kubeadm可以快速部署一个kubernetes集群，kubeadm设计目的为新用户开始尝试kubernetes提供一">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-09-26T01:59:18.992Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="怪叔叔的博客">
-<meta name="twitter:description" content="温故而知新">
+<meta name="twitter:title" content="Kubernetes单节点部署">
+<meta name="twitter:description" content="官方提供了Kubernetes部署的3种方式 minikube  Minikube是一个工具，可以在本地快速部署一个单节点的Kubernetes,不能用于生产环境  官方文档:https://kubernetes.io/docs/setup/minikube/ kubeadm  kubeadm可以快速部署一个kubernetes集群，kubeadm设计目的为新用户开始尝试kubernetes提供一">
   
     <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
   
@@ -67,97 +68,76 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/24/MAC下安装pycurl解决办法/" class="archive-article-date">
-  <time datetime="2018-01-24T07:39:17.000Z" itemprop="datePublished">1月 24</time>
+        <section id="main"><article id="post-Kubernetes单节点部署" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/25/Kubernetes单节点部署/" class="article-date">
+  <time datetime="2018-09-25T13:21:12.000Z" itemprop="datePublished">2018-09-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/MAC下安装pycurl解决办法/">MAC下安装pycurl解决办法</a>
+    <h1 class="article-title" itemprop="name">
+      Kubernetes单节点部署
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/24/mac下安装pyaudio/" class="archive-article-date">
-  <time datetime="2018-01-24T03:20:52.000Z" itemprop="datePublished">1月 24</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/mac下安装pyaudio/">mac下安装pyaudio</a>
-    </h1>
-  
+        <h3 id="官方提供了Kubernetes部署的3种方式"><a href="#官方提供了Kubernetes部署的3种方式" class="headerlink" title="官方提供了Kubernetes部署的3种方式"></a>官方提供了Kubernetes部署的3种方式</h3><ul>
+<li>minikube<br>  Minikube是一个工具，可以在本地快速部署一个单节点的Kubernetes,不能用于生产环境<br>  官方文档:<a href="https://kubernetes.io/docs/setup/minikube/" target="_blank" rel="noopener">https://kubernetes.io/docs/setup/minikube/</a></li>
+<li><p>kubeadm<br>  kubeadm可以快速部署一个kubernetes集群，kubeadm设计目的为新用户开始尝试kubernetes提供一种简单<br>的方法。目前是Beta版。</p>
+<pre><code>官方文档:https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/
+        https://kubernetes.io/docs/setup/independent/install-kubeadm/
+</code></pre></li>
+<li><p>二进制包<br>  从官方下载发行版的二进制包，手动部署每个组件，组成Kubernetes集群。目前企业生产环境中主要使用该方式。<br>  下载地址:<a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1113" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1113</a></p>
+</li>
+</ul>
+<h3 id="1-安装需求"><a href="#1-安装需求" class="headerlink" title="1.安装需求"></a>1.安装需求</h3><ul>
+<li>操作系统</li>
+<li>内存2GB，2核cpu</li>
+<li>每个节点间可以通信</li>
+<li>每个节点主机名、mac地址、produc_uuid唯一</li>
+<li>禁止swap分区，这样子才能使kubelet正常工作</li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/11/第一篇测试/" class="archive-article-date">
-  <time datetime="2018-01-11T09:24:56.000Z" itemprop="datePublished">1月 11</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/11/第一篇测试/">通过hexo和github部署个人博客</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/11/hello-world/" class="archive-article-date">
-  <time datetime="2018-01-11T08:35:45.000Z" itemprop="datePublished">1月 11</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/09/25/Kubernetes单节点部署/" data-id="cjn72yb300001miwt6o8oi02m" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/12/交换机监控/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          交换机监控
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/05/08/confluence6-3安装与破解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">confluence6.3安装与破解</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         

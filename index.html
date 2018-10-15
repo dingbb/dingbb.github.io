@@ -69,6 +69,192 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-交换机监控" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/12/交换机监控/" class="article-date">
+  <time datetime="2018-10-12T03:19:11.000Z" itemprop="datePublished">2018-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/12/交换机监控/">交换机监控</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-首先开启交换机的snmp"><a href="#1-首先开启交换机的snmp" class="headerlink" title="1.首先开启交换机的snmp"></a>1.首先开启交换机的snmp</h3><p>这里我们实验的是针对华为的交换机。思科的命令有些许不同。流程一样。</p>
+<ul>
+<li><p>查看交换机是否开启snmp,如果开启则有Community name相关内容，未开启则结果未0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;DP26-B14-B15-6810&gt;display snmp-agent community</span><br><span class="line">   Total number is 0  #未开启</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开启snmp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">system-view #进入系统视图</span><br><span class="line">snmp-agent sys-info version v2c #配置SNMP的协议版本为SNMPv2c</span><br><span class="line">snmp-agent community read xxxxxx #配置设备的读写团体名。团体名将以密文形式保存在配置文件中</span><br><span class="line">commit #执行commit命令提交，配置到系统中</span><br><span class="line">quit #退出</span><br><span class="line">save #保存</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看snmp是否已经开启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DP26-B14-B15-6810&gt;display snmp-agent community</span><br><span class="line">   Community name: %^%#w^N)J1a^dAHM(nP&amp;Y2v1S^Q_&apos;&lt;eutNoFa7&amp;p+ssfoe7kR\041-_j;caSX:&lt;-P!Jygw0Bpd&#125;gP[at]B;:W)I%^%#</span><br><span class="line">       Group name: %^%#w^N)J1a^dAHM(nP&amp;Y2v1S^Q_&apos;&lt;eutNoFa7&amp;p+dsfoe7kR\041-_j;caSX:&lt;-P!Jygw0Bpd&#125;gP[at]B;:W)I%^%#</span><br><span class="line">       Storage-type: nonVolatile</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-配置监控-zabbix-amp-open-falcon"><a href="#2-配置监控-zabbix-amp-open-falcon" class="headerlink" title="2.配置监控 zabbix &amp; open-falcon"></a>2.配置监控 zabbix &amp; open-falcon</h3><ul>
+<li><p>open-falcon<br>Open-Falcon 原生并没有交换机的数据采集模块。需要使用社区工具–<br><a href="https://github.com/gaochao1/swcollector" target="_blank" rel="noopener">swcollector</a></p>
+</li>
+<li><p>zabbix<br>zabbix的监控主要是监控模版<br><a href="https://pan.baidu.com/s/1qjj77RqJqFb_ts_yX4d3zw" target="_blank" rel="noopener">templates_Cisco Switch</a><br><a href="https://pan.baidu.com/s/1RMQ6QZRAQlculbvH0YjEsQ" target="_blank" rel="noopener">templates_huawei Switch</a></p>
+</li>
+</ul>
+<p>参考 ：<br><a href="http://support.huawei.com/enterprise/docinforeader!loadDocument1.action?contentId=DOC1000027324&amp;partNo=10042#dc_cfg_snmp_0013" target="_blank" rel="noopener">华为SNMP配置说明</a><br><a href="https://www.jianshu.com/p/25f7ae4bd07d" target="_blank" rel="noopener">open-falcon监控</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/10/12/交换机监控/" data-id="cjn72yb3c0007miwt9lvyy3qn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Kubernetes单节点部署" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/25/Kubernetes单节点部署/" class="article-date">
+  <time datetime="2018-09-25T13:21:12.000Z" itemprop="datePublished">2018-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/25/Kubernetes单节点部署/">Kubernetes单节点部署</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="官方提供了Kubernetes部署的3种方式"><a href="#官方提供了Kubernetes部署的3种方式" class="headerlink" title="官方提供了Kubernetes部署的3种方式"></a>官方提供了Kubernetes部署的3种方式</h3><ul>
+<li>minikube<br>  Minikube是一个工具，可以在本地快速部署一个单节点的Kubernetes,不能用于生产环境<br>  官方文档:<a href="https://kubernetes.io/docs/setup/minikube/" target="_blank" rel="noopener">https://kubernetes.io/docs/setup/minikube/</a></li>
+<li><p>kubeadm<br>  kubeadm可以快速部署一个kubernetes集群，kubeadm设计目的为新用户开始尝试kubernetes提供一种简单<br>的方法。目前是Beta版。</p>
+<pre><code>官方文档:https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm/
+        https://kubernetes.io/docs/setup/independent/install-kubeadm/
+</code></pre></li>
+<li><p>二进制包<br>  从官方下载发行版的二进制包，手动部署每个组件，组成Kubernetes集群。目前企业生产环境中主要使用该方式。<br>  下载地址:<a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1113" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#v1113</a></p>
+</li>
+</ul>
+<h3 id="1-安装需求"><a href="#1-安装需求" class="headerlink" title="1.安装需求"></a>1.安装需求</h3><ul>
+<li>操作系统</li>
+<li>内存2GB，2核cpu</li>
+<li>每个节点间可以通信</li>
+<li>每个节点主机名、mac地址、produc_uuid唯一</li>
+<li>禁止swap分区，这样子才能使kubelet正常工作</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/09/25/Kubernetes单节点部署/" data-id="cjn72yb300001miwt6o8oi02m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-confluence6-3安装与破解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/08/confluence6-3安装与破解/" class="article-date">
+  <time datetime="2018-05-08T07:03:39.000Z" itemprop="datePublished">2018-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/08/confluence6-3安装与破解/">confluence6.3安装与破解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="一、安装jdk8"><a href="#一、安装jdk8" class="headerlink" title="一、安装jdk8"></a>一、安装jdk8</h5><h6 id="a．先卸载系统安装时自带的jdk，卸载流程如下"><a href="#a．先卸载系统安装时自带的jdk，卸载流程如下" class="headerlink" title="a．先卸载系统安装时自带的jdk，卸载流程如下"></a>a．先卸载系统安装时自带的jdk，卸载流程如下</h6><p>在终端root用户下分别执行：rpm -qa|grep jdk、rpm -qa|grep gcj 确定系统自带jdk版本号。<br> rpm -e –nodeps 后面跟上卸载的包名，卸载系统自带的jdk，执行以下命名检查卸载是否完成。<br>java -version</p>
+<h6 id="a．安装新版本JDK"><a href="#a．安装新版本JDK" class="headerlink" title="a．安装新版本JDK"></a>a．安装新版本JDK</h6><p>以root用户把安装文件jdk1.8.0_102tar.gz拷贝到/usr/local/目录下</p>
+<p>进行解压tar -zxvf jdk1.8.0_102tar.gz<br>执行chmod 755 -R  jdk1.8.0_102安装包赋予相关权限<br>配置环境变量：vim /etc/profile 文件最后增加如下配置<br>export JAVA_HOME=/usr/local/jdk1.8.0_102<br>export CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib<br>export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH:$HOME/bin<br>export JRE_HOME=/usr/local/jdk1.8.0_102/jre<br>然后执行source /etc/profile 使配置生效。</p>
+<h5 id="二、安装mysql环境（这里用的是centos7下的MariaDB）"><a href="#二、安装mysql环境（这里用的是centos7下的MariaDB）" class="headerlink" title="二、安装mysql环境（这里用的是centos7下的MariaDB）"></a>二、安装mysql环境（这里用的是centos7下的MariaDB）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mariadb mariadb-server</span><br><span class="line">systemctl start mariadb</span><br><span class="line">systemctl enable mariadb</span><br></pre></td></tr></table></figure>
+<p>接下来进行MariaDB的相关简单配置，设置密码，会提示先输入密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">接下来进行MariaDB的相关简单配置，设置密码，会提示先输入密码</span><br><span class="line">[root@test-vm03 ~]# mysql_secure_installation</span><br><span class="line">首先是设置密码，会提示先输入密码</span><br><span class="line">  </span><br><span class="line">Enter current password for root (enter for none):&lt;–初次运行直接回车</span><br><span class="line">  </span><br><span class="line">设置密码</span><br><span class="line">  </span><br><span class="line">Set root password? [Y/n] &lt;– 是否设置root用户密码，输入y并回车或直接回车</span><br><span class="line">New password: &lt;– 设置root用户的密码</span><br><span class="line">Re-enter new password: &lt;– 再输入一次你设置的密码</span><br><span class="line">  </span><br><span class="line">其他配置</span><br><span class="line">Remove anonymous users? [Y/n] &lt;– 是否删除匿名用户，回车</span><br><span class="line">Disallow root login remotely? [Y/n] &lt;–是否禁止root远程登录,回车,</span><br><span class="line">Remove test database and access to it? [Y/n] &lt;– 是否删除test数据库，回车</span><br><span class="line">Reload privilege tables now? [Y/n] &lt;– 是否重新加载权限表，回车</span><br><span class="line"> </span><br><span class="line">[root@test-vm03 ~]# mysql -p123456</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 3</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"> </span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"> </span><br><span class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows in set (0.01 sec)</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">接下来配置MariaDB的字符集:</span><br><span class="line">-&gt; 首先是配置文件/etc/my.cnf，在[mysqld]标签下添加</span><br><span class="line">init_connect=&apos;SET collation_connection = utf8_unicode_ci&apos;</span><br><span class="line">init_connect=&apos;SET NAMES utf8&apos;</span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">  </span><br><span class="line">-&gt; 接着配置文件/etc/my.cnf.d/client.cnf，在[client]中添加</span><br><span class="line">default-character-set=utf8</span><br><span class="line">  </span><br><span class="line">-&gt; 然后配置文件/etc/my.cnf.d/mysql-clients.cnf，在[mysql]中添加</span><br><span class="line">default-character-set=utf8</span><br><span class="line">  </span><br><span class="line">最后是重启MariaDB，并登陆MariaDB查看字符集</span><br><span class="line">[root@test-vm001 my.cnf.d]# systemctl restart mariadb</span><br><span class="line"> </span><br><span class="line">[root@test-vm03 ~]# mysql -p123456</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 4</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"> </span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"> </span><br><span class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; show variables like &quot;%character%&quot;;show variables like &quot;%collation%&quot;;</span><br><span class="line">+--------------------------+----------------------------+</span><br><span class="line">| Variable_name            | Value                      |</span><br><span class="line">+--------------------------+----------------------------+</span><br><span class="line">| character_set_client     | utf8                       |</span><br><span class="line">| character_set_connection | utf8                       |</span><br><span class="line">| character_set_database   | utf8                       |</span><br><span class="line">| character_set_filesystem | binary                     |</span><br><span class="line">| character_set_results    | utf8                       |</span><br><span class="line">| character_set_server     | utf8                       |</span><br><span class="line">| character_set_system     | utf8                       |</span><br><span class="line">| character_sets_dir       | /usr/share/mysql/charsets/ |</span><br><span class="line">+--------------------------+----------------------------+</span><br><span class="line">8 rows in set (0.00 sec)</span><br><span class="line"> </span><br><span class="line">+----------------------+-----------------+</span><br><span class="line">| Variable_name        | Value           |</span><br><span class="line">+----------------------+-----------------+</span><br><span class="line">| collation_connection | utf8_unicode_ci |</span><br><span class="line">| collation_database   | utf8_unicode_ci |</span><br><span class="line">| collation_server     | utf8_unicode_ci |</span><br><span class="line">+----------------------+-----------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt;</span><br><span class="line"> </span><br><span class="line">为Confluence创建对应的数据库、用户名和密码</span><br><span class="line">MariaDB [(none)]&gt; create database confluence default character set utf8 collate utf8_bin;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; grant all on confluence.* to &apos;confluence&apos;@&apos;%&apos; identified by &apos;confluencepasswd&apos;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"> </span><br><span class="line">MariaDB [(none)]&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">[root@6aeb89685176 ~]# chmod u+x atlassian-confluence-6.3.1-x64.bin </span><br><span class="line">[root@6aeb89685176 ~]# ./atlassian-confluence-6.3.1-x64.bin </span><br><span class="line">Unpacking JRE ...</span><br><span class="line">Starting Installer ...</span><br><span class="line">May 08, 2018 8:53:13 AM java.util.prefs.FileSystemPreferences$1 run</span><br><span class="line">INFO: Created user preferences directory.</span><br><span class="line">May 08, 2018 8:53:13 AM java.util.prefs.FileSystemPreferences$2 run</span><br><span class="line">INFO: Created system preferences directory in java.home.</span><br><span class="line"></span><br><span class="line">This will install Confluence 6.3.1 on your computer.</span><br><span class="line">OK [o, Enter], Cancel [c]</span><br><span class="line">o</span><br><span class="line">Choose the appropriate installation or upgrade option.</span><br><span class="line">Please choose one of the following:</span><br><span class="line">Express Install (uses default settings) [1], </span><br><span class="line">Custom Install (recommended for advanced users) [2, Enter], </span><br><span class="line">Upgrade an existing Confluence installation [3]</span><br><span class="line">1</span><br><span class="line">See where Confluence will be installed and the settings that will be used.</span><br><span class="line">Installation Directory: /opt/atlassian/confluence </span><br><span class="line">Home Directory: /var/atlassian/application-data/confluence </span><br><span class="line">HTTP Port: 8090 </span><br><span class="line">RMI Port: 8000 </span><br><span class="line">Install as service: Yes </span><br><span class="line">Install [i, Enter], Exit [e]</span><br><span class="line">i</span><br><span class="line"></span><br><span class="line">Extracting files ...</span><br><span class="line">                                                                           </span><br><span class="line"></span><br><span class="line">Please wait a few moments while we configure Confluence.</span><br><span class="line">Installation of Confluence 6.3.1 is complete</span><br><span class="line">Start Confluence now?</span><br><span class="line">Yes [y, Enter], No [n]</span><br><span class="line">y</span><br><span class="line"></span><br><span class="line">Please wait a few moments while Confluence starts up.</span><br><span class="line">Launching Confluence ...</span><br><span class="line">Installation of Confluence 6.3.1 is complete</span><br><span class="line">Your installation of Confluence 6.3.1 is now ready and can be accessed via</span><br><span class="line">your browser.</span><br><span class="line">Confluence 6.3.1 can be accessed at http://localhost:8090</span><br><span class="line">Finishing installation ...</span><br><span class="line">[root@6aeb89685176 ~]#</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/05/08/confluence6-3安装与破解/" data-id="cjn72yb3d0008miwt5c4fjyeh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-jira和gitlab以及Confluence通过ldap登录配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/02/jira和gitlab以及Confluence通过ldap登录配置/" class="article-date">
+  <time datetime="2018-05-02T09:23:39.000Z" itemprop="datePublished">2018-05-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/02/jira和gitlab以及Confluence通过ldap登录配置/">jira和gitlab以及Confluence通过ldap登录配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="jira和confluence-相关配置"><a href="#jira和confluence-相关配置" class="headerlink" title="jira和confluence 相关配置"></a>jira和confluence 相关配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://dingbingbing.top/2018/05/02/jira和gitlab以及Confluence通过ldap登录配置/" data-id="cjn72yb3f0009miwtbwha3ujf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Anaconda安装以及包管理工具conda介绍" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/25/Anaconda安装以及包管理工具conda介绍/" class="article-date">
@@ -98,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/25/Anaconda安装以及包管理工具conda介绍/" data-id="cjgovuafv00007v9kuabb8ukn" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/25/Anaconda安装以及包管理工具conda介绍/" data-id="cjn72yb2v0000miwtvlmv0igq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -177,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/20/centos7部署openldap/" data-id="cjgovuag100027v9kpz1wj4rk" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/20/centos7部署openldap/" data-id="cjn72yb41000cmiwtlp3rj72f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -226,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/09/cloudstack初始化测试环境数据/" data-id="cjgovuag900097v9kwumlpip6" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/09/cloudstack初始化测试环境数据/" data-id="cjn72yb350004miwtr5uf4zjo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,7 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/04/03/cloudstack创建vm模版准备/" data-id="cjgovuag200037v9k0a8v9cwr" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/04/03/cloudstack创建vm模版准备/" data-id="cjn72yb370005miwtli8c4as7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +494,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/03/28/centos6安装vsftp/" data-id="cjgovuag500057v9k0a956n61" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/03/28/centos6安装vsftp/" data-id="cjn72yb340003miwt83w6lxyc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -369,201 +555,7 @@ chkconfig vsftpd on</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/03/13/部署私有云owncloud/" data-id="cjgovuaga000a7v9kxravvko0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MAC下安装pycurl解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/MAC下安装pycurl解决办法/" class="article-date">
-  <time datetime="2018-01-24T07:39:17.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/MAC下安装pycurl解决办法/">MAC下安装pycurl解决办法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>sudo pip install pycurl报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  src/pycurl.h:185:5: warning: &quot;libcurl was compiled with SSL support, but configure could not determine which &quot;      &quot;library was used; thus no SSL crypto locking callbacks will be set, which may &quot;      &quot;cause random crashes on SSL requests&quot; [-W#warnings]</span><br><span class="line">    #   warning \</span><br><span class="line">        ^</span><br><span class="line">    1 warning generated.</span><br><span class="line">    cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. build/temp.macosx-10.13-intel-2.7/src/docstrings.o build/temp.macosx-10.13-intel-2.7/src/easy.o build/temp.macosx-10.13-intel-2.7/src/module.o build/temp.macosx-10.13-intel-2.7/src/multi.o build/temp.macosx-10.13-intel-2.7/src/oscompat.o build/temp.macosx-10.13-intel-2.7/src/pythoncompat.o build/temp.macosx-10.13-intel-2.7/src/share.o build/temp.macosx-10.13-intel-2.7/src/stringcompat.o build/temp.macosx-10.13-intel-2.7/src/threadsupport.o -lcurl -o build/lib.macosx-10.13-intel-2.7/pycurl.so</span><br><span class="line">    running install_lib</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/pycurl.so -&gt; /Library/Python/2.7/site-packages</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/curl/__init__.py -&gt; /Library/Python/2.7/site-packages/curl</span><br><span class="line">    byte-compiling /Library/Python/2.7/site-packages/curl/__init__.py to __init__.pyc</span><br><span class="line">    running install_data</span><br><span class="line">    creating /System/Library/Frameworks/Python.framework/Versions/2.7/share</span><br><span class="line">    error: could not create &apos;/System/Library/Frameworks/Python.framework/Versions/2.7/share&apos;: Operation not permitted</span><br><span class="line">    </span><br><span class="line">    ----------------------------------------</span><br><span class="line">Command &quot;/usr/bin/python -u -c &quot;import setuptools, tokenize;__file__=&apos;/private/tmp/pip-build-7AHn_4/pycurl/setup.py&apos;;f=getattr(tokenize, &apos;open&apos;, open)(__file__);code=f.read().replace(&apos;\r\n&apos;, &apos;\n&apos;);f.close();exec(compile(code, __file__, &apos;exec&apos;))&quot; install --record /tmp/pip-SqelGU-record/install-record.txt --single-version-externally-managed --compile&quot; failed with error code 1 in /private/tmp/pip-build-7AHn_4/pycur</span><br></pre></td></tr></table></figure></p>
-<p>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pycurl -i https://pypi.tuna.tsinghua.edu.cn/simple --user</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/" data-id="cjgovuafz00017v9kwfam4pex" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mac下安装pyaudio" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/mac下安装pyaudio/" class="article-date">
-  <time datetime="2018-01-24T03:20:52.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/mac下安装pyaudio/">mac下安装pyaudio</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>主要步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install  ＃安装xcode, 已经装好的的话，执行的时候会提示</span><br><span class="line">brew remove portaudio  ＃先卸载</span><br><span class="line">brew install portaudio ＃重新安装</span><br><span class="line">sudo pip install pyaudio </span><br><span class="line">－－OK</span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="https://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3" target="_blank" rel="noopener">https://stackoverflow.com/questions/33851379/pyaudio-installation-on-mac-python-3</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/mac下安装pyaudio/" data-id="cjgovuag800087v9kmef0g8r3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-第一篇测试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/第一篇测试/" class="article-date">
-  <time datetime="2018-01-11T09:24:56.000Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/第一篇测试/">通过hexo和github部署个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如何通过hexo和github部署个人博客</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>   做运维相关工作已经4年，最近琢磨着建立一个自己的知识库，用博客的形式，记录下，自己工作中的点滴。<br>希望能在这个过程中，不断的总结，思考。也希望自己写的文章能帮助到大家。经过网上找资料。最终选择了<br>hexo与github的方式。<br><a href="https://github.com/hexojs/hexo" target="_blank" rel="noopener">hexo</a>是一款基于Node.js的静态博客框架,本文是再mac部署的。<br>希望能帮助到大家。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><ol>
-<li><p><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a>官网下载相应平台的<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">最新版本</a></p>
-</li>
-<li><p>安装node,在终端输入以下命令<br><pre><code>brew install node</code></pre><br>如果没有安装brew请参考<a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="noopener">mac上安装brew</a></p>
-</li>
-<li>验证是否安装成功<br><pre><code>node -v</code></pre><br>出现版本号如 v9.3.0 代表安装成功。<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4></li>
-<li>通过brew安装<pre><code>brew install git</code></pre></li>
-<li>下载安装。<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载地址</a> <h4 id="申请Github账号"><a href="#申请Github账号" class="headerlink" title="申请Github账号"></a>申请Github账号</h4></li>
-<li>登陆github申请账号</li>
-</ol>
-<p><a href="https://github.com" target="_blank" rel="noopener">https://github.com</a></p>
-<ol>
-<li>创建一个新的<br><a><img src="/img/WX20180120-1746512x.png" height="64px"></a></li>
-</ol>
-<h2 id="Tables-and-alignment"><a href="#Tables-and-alignment" class="headerlink" title="Tables and alignment"></a>Tables and alignment</h2><table>
-<thead>
-<tr>
-<th>First Header</th>
-<th>Second Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Content from cell 1</td>
-<td>Content from cell 2</td>
-</tr>
-<tr>
-<td>Content in the first column</td>
-<td>Content in the second column</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Markdown-Plus"><a href="#Markdown-Plus" class="headerlink" title="Markdown Plus"></a>Markdown Plus</h3><p><a href="http://tylingsoft.com/markdown-plus/" target="_blank" rel="noopener"><img src="http://tylingsoft.com/img/mdp/icon.png" height="64px"></a><br><a href="http://tylingsoft.com/markdown-plus/" target="_blank" rel="noopener">Markdown Plus</a> is available for both OS X and Windows. You get every feature of the web version plus lots of advanced features.</p>
-<h3 id="医院自动发送表单监控报警"><a href="#医院自动发送表单监控报警" class="headerlink" title="医院自动发送表单监控报警"></a>医院自动发送表单监控报警</h3><p><a href="https://www.lanniuh.com/hug-web/listDteHosp/" target="_blank" rel="noopener"><img src="http://dingbingbing.top/img/alertred.png" height="64px"></a><br><a href="https://www.lanniuh.com/hug-web/listDteHosp" target="_blank" rel="noopener">登陆云端查看jh-hos是否连接成功</a>  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/第一篇测试/" data-id="cjgovuag600067v9kh7b0vo82" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/11/hello-world/" class="article-date">
-  <time datetime="2018-01-11T08:35:45.403Z" itemprop="datePublished">2018-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/11/hello-world/" data-id="cjgovuag700077v9kj89meemz" class="article-share-link">Share</a>
+      <a data-url="http://dingbingbing.top/2018/03/13/部署私有云owncloud/" data-id="cjn72yb43000dmiwtqtxjea3u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -574,6 +566,11 @@ chkconfig vsftpd on</code></p>
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
@@ -591,7 +588,7 @@ chkconfig vsftpd on</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
     </div>
   </div>
 
@@ -604,23 +601,23 @@ chkconfig vsftpd on</code></p>
       <ul>
         
           <li>
+            <a href="/2018/10/12/交换机监控/">交换机监控</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/25/Kubernetes单节点部署/">Kubernetes单节点部署</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/08/confluence6-3安装与破解/">confluence6.3安装与破解</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/02/jira和gitlab以及Confluence通过ldap登录配置/">jira和gitlab以及Confluence通过ldap登录配置</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/25/Anaconda安装以及包管理工具conda介绍/">Anaconda安装以及包管理工具conda介绍</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/20/centos7部署openldap/">centos7部署openldap</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/09/cloudstack初始化测试环境数据/">cloudstack初始化测试环境数据</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/03/cloudstack创建vm模版准备/">cloudstack创建vm模版准备</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/28/centos6安装vsftp/">centos6安装vsftp</a>
           </li>
         
       </ul>
