@@ -1,216 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+extends base
 
-  
-  <title>MAC下安装pycurl解决办法 | 怪叔叔的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sudo pip install pycurl报错123456789101112131415  src/pycurl.h:185:5: warning: &amp;quot;libcurl was compiled with SSL support, but configure could not determine which &amp;quot;      &amp;quot;library was used; th">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MAC下安装pycurl解决办法">
-<meta property="og:url" content="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/index.html">
-<meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="sudo pip install pycurl报错123456789101112131415  src/pycurl.h:185:5: warning: &amp;quot;libcurl was compiled with SSL support, but configure could not determine which &amp;quot;      &amp;quot;library was used; th">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-24T07:58:18.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MAC下安装pycurl解决办法">
-<meta name="twitter:description" content="sudo pip install pycurl报错123456789101112131415  src/pycurl.h:185:5: warning: &amp;quot;libcurl was compiled with SSL support, but configure could not determine which &amp;quot;      &amp;quot;library was used; th">
-  
-    <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+block title
+  title= page.title + ' | ' + config.title
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">怪叔叔的博客</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">攀峰之高险，岂有崖巅。搏海之明辉，何来彼岸。前进不止，奋斗不息。</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://dingbingbing.top"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-MAC下安装pycurl解决办法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/MAC下安装pycurl解决办法/" class="article-date">
-  <time datetime="2018-01-24T07:39:17.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      MAC下安装pycurl解决办法
-    </h1>
-  
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta= page.date.format('ll')
+      if page.categories.length > 0
+        span= ' | '
+        span.category
+          for category in page.categories.toArray()
+            a(href=url_for(category.path))= category.name
+      if theme.busuanzi == true
+        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
+        span#busuanzi_container_page_pv= ' | '
+          span#busuanzi_value_page_pv
+          span= ' ' + __('Hits')
+      if theme.wordcount == true
+        include _partial/wordcount.pug
+    if theme.disqus
+      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
+    if theme.changyan
+      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
+        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
+        span= ' ' + __('Comment')
+      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
+    if theme.valine.enable
+      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
+        span.valine-comment-count(data-xid=url_for(page.path))
+        span= ' ' + __('Comment')
+    if page.toc
+      div(class='clear')
+        div(id='toc' class='toc-article')
+          div(class='toc-title')= __('contents')
+          != toc(page.content, {list_number: theme.toc_number})
+    .post-content
+      != page.content
+    if theme.donate.enable == true
+      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>sudo pip install pycurl报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  src/pycurl.h:185:5: warning: &quot;libcurl was compiled with SSL support, but configure could not determine which &quot;      &quot;library was used; thus no SSL crypto locking callbacks will be set, which may &quot;      &quot;cause random crashes on SSL requests&quot; [-W#warnings]</span><br><span class="line">    #   warning \</span><br><span class="line">        ^</span><br><span class="line">    1 warning generated.</span><br><span class="line">    cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. build/temp.macosx-10.13-intel-2.7/src/docstrings.o build/temp.macosx-10.13-intel-2.7/src/easy.o build/temp.macosx-10.13-intel-2.7/src/module.o build/temp.macosx-10.13-intel-2.7/src/multi.o build/temp.macosx-10.13-intel-2.7/src/oscompat.o build/temp.macosx-10.13-intel-2.7/src/pythoncompat.o build/temp.macosx-10.13-intel-2.7/src/share.o build/temp.macosx-10.13-intel-2.7/src/stringcompat.o build/temp.macosx-10.13-intel-2.7/src/threadsupport.o -lcurl -o build/lib.macosx-10.13-intel-2.7/pycurl.so</span><br><span class="line">    running install_lib</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/pycurl.so -&gt; /Library/Python/2.7/site-packages</span><br><span class="line">    copying build/lib.macosx-10.13-intel-2.7/curl/__init__.py -&gt; /Library/Python/2.7/site-packages/curl</span><br><span class="line">    byte-compiling /Library/Python/2.7/site-packages/curl/__init__.py to __init__.pyc</span><br><span class="line">    running install_data</span><br><span class="line">    creating /System/Library/Frameworks/Python.framework/Versions/2.7/share</span><br><span class="line">    error: could not create &apos;/System/Library/Frameworks/Python.framework/Versions/2.7/share&apos;: Operation not permitted</span><br><span class="line">    </span><br><span class="line">    ----------------------------------------</span><br><span class="line">Command &quot;/usr/bin/python -u -c &quot;import setuptools, tokenize;__file__=&apos;/private/tmp/pip-build-7AHn_4/pycurl/setup.py&apos;;f=getattr(tokenize, &apos;open&apos;, open)(__file__);code=f.read().replace(&apos;\r\n&apos;, &apos;\n&apos;);f.close();exec(compile(code, __file__, &apos;exec&apos;))&quot; install --record /tmp/pip-SqelGU-record/install-record.txt --single-version-externally-managed --compile&quot; failed with error code 1 in /private/tmp/pip-build-7AHn_4/pycur</span><br></pre></td></tr></table></figure></p>
-<p>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pycurl -i https://pypi.tuna.tsinghua.edu.cn/simple --user</span><br></pre></td></tr></table></figure></p>
+    if theme.post_copyright.enable == true
+      div
+        ul.post-copyright
+          li.post-copyright-author
+            strong= __('copyright_author_prefix')
+            = theme.post_copyright.author
+          li.post-copyright-link
+            strong= __('copyright_link_prefix')
+            a(href='/' + page.path)= page.permalink
+          li.post-copyright-license
+            strong= __('copyright_declare_prefix')
+            if theme.post_copyright.copyright_text
+              != theme.post_copyright.copyright_text
+            else
+              != __('copyright_default_text')
+      br
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/01/24/MAC下安装pycurl解决办法/" data-id="cjneirw0k0003yywfa4pwjrul" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/03/13/部署私有云owncloud/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          部署私有云owncloud
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/01/24/mac下安装pyaudio/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">mac下安装pyaudio</div>
-    </a>
-  
-</nav>
+    if theme.shareto == true
+      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
+      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
 
-  
-</article>
+    include _partial/tag.pug
+    include _partial/post_nav.pug
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/10/18/Atom-as-Go-IDE/">Atom as Go IDE</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/17/gogs部署使用/">gogs部署使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/12/交换机监控/">交换机监控</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/25/Kubernetes单节点部署/">Kubernetes单节点部署</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/08/confluence6-3安装与破解/">confluence6.3安装与破解</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Ice Ding<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments
+      include _partial/comments.pug

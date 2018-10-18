@@ -1,241 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+extends base
 
-  
-  <title>部署私有云owncloud | 怪叔叔的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。 环境需求操作系统：centos7 最新小安装即可（关闭selinx和防火墙）应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3备注: 最好是全新干净的系统部署。如果部署请卸载对应的php环境">
-<meta property="og:type" content="article">
-<meta property="og:title" content="部署私有云owncloud">
-<meta property="og:url" content="http://dingbingbing.top/2018/03/13/部署私有云owncloud/index.html">
-<meta property="og:site_name" content="怪叔叔的博客">
-<meta property="og:description" content="前言之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。 环境需求操作系统：centos7 最新小安装即可（关闭selinx和防火墙）应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3备注: 最好是全新干净的系统部署。如果部署请卸载对应的php环境">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://dingbingbing.top/img/WX201803211507302x.png">
-<meta property="og:updated_time" content="2018-03-22T08:45:25.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="部署私有云owncloud">
-<meta name="twitter:description" content="前言之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。 环境需求操作系统：centos7 最新小安装即可（关闭selinx和防火墙）应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3备注: 最好是全新干净的系统部署。如果部署请卸载对应的php环境">
-<meta name="twitter:image" content="http://dingbingbing.top/img/WX201803211507302x.png">
-  
-    <link rel="alternate" href="/atom.xml" title="怪叔叔的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+block title
+  title= page.title + ' | ' + config.title
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">怪叔叔的博客</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">攀峰之高险，岂有崖巅。搏海之明辉，何来彼岸。前进不止，奋斗不息。</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://dingbingbing.top"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-部署私有云owncloud" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/13/部署私有云owncloud/" class="article-date">
-  <time datetime="2018-03-13T08:46:59.000Z" itemprop="datePublished">2018-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      部署私有云owncloud
-    </h1>
-  
+block content
+  .post
+    h1.post-title= page.title
+    .post-meta= page.date.format('ll')
+      if page.categories.length > 0
+        span= ' | '
+        span.category
+          for category in page.categories.toArray()
+            a(href=url_for(category.path))= category.name
+      if theme.busuanzi == true
+        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
+        span#busuanzi_container_page_pv= ' | '
+          span#busuanzi_value_page_pv
+          span= ' ' + __('Hits')
+      if theme.wordcount == true
+        include _partial/wordcount.pug
+    if theme.disqus
+      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
+    if theme.changyan
+      a.ds-thread-count(href=url_for(page.path) + '#SOHUCS')
+        span#changyan_count_unit(style='font-size: 15px; color: #6E7173;') 0
+        span= ' ' + __('Comment')
+      script(src='https://assets.changyan.sohu.com/upload/plugins/plugins.count.js', async)
+    if theme.valine.enable
+      a.disqus-comment-count( href=url_for(page.path) + '#vcomment')
+        span.valine-comment-count(data-xid=url_for(page.path))
+        span= ' ' + __('Comment')
+    if page.toc
+      div(class='clear')
+        div(id='toc' class='toc-article')
+          div(class='toc-title')= __('contents')
+          != toc(page.content, {list_number: theme.toc_number})
+    .post-content
+      != page.content
+    if theme.donate.enable == true
+      iframe(src='/donate/?AliPayQR=' + theme.donate.alipay_qr + '&WeChatQR=' + theme.donate.wechat_qr + '&GitHub=' + theme.donate.github + '&BTCQR=' + theme.donate.btc_qr + '&BTCKEY='+ theme.donate.btc_key + '&PayPal=' + theme.donate.paypal_url, style='overflow-x:hidden; overflow-y:hidden; border:0xp none #fff; min-height:240px; width:100%;', frameborder='0', scrolling='no')
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前公司各种文件都是放在svn和ftp上造成很多数据流失，公有云也有靠谱，处于安全考虑，决定部署私有云。</p>
-<h3 id="环境需求"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求</h3><p>操作系统：centos7 最新小安装即可（关闭selinx和防火墙）<br>应用软件：Nginx 1.10.2 、MariaDB 5.5.56 、PHP 7.1.8 、Redis 3.2.10 、ownCloud 10.0.3<br>备注: 最好是全新干净的系统部署。如果部署请卸载对应的php环境，默认是php5</p>
-<h3 id="1-安装应用"><a href="#1-安装应用" class="headerlink" title="1.安装应用"></a>1.安装应用</h3><h5 id="1-1-添加-EPEL-amp-WEBTATIC-软件源"><a href="#1-1-添加-EPEL-amp-WEBTATIC-软件源" class="headerlink" title="1.1 添加 EPEL &amp; WEBTATIC 软件源"></a>1.1 添加 EPEL &amp; WEBTATIC 软件源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release &amp;&amp; rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm &amp;&amp; yum -y update</span><br></pre></td></tr></table></figure>
-<h5 id="1-2-安装所需软件包-安装前先卸掉系统自带的php默认是php5"><a href="#1-2-安装所需软件包-安装前先卸掉系统自带的php默认是php5" class="headerlink" title="1.2 安装所需软件包 (安装前先卸掉系统自带的php默认是php5)"></a>1.2 安装所需软件包 (安装前先卸掉系统自带的php默认是php5)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install nginx mariadb-server redis lbzip2 php71w-common php71w-fpm php71w-gd php71w-mysql php71w-mbstring php71w-intl php71w-mcrypt php71w-pecl-imagick php71w-xml php71w-pecl-redis samba-client</span><br></pre></td></tr></table></figure>
-<h5 id="1-3-下载-amp-安装-ownCloud"><a href="#1-3-下载-amp-安装-ownCloud" class="headerlink" title="1.3 下载 &amp; 安装 ownCloud"></a>1.3 下载 &amp; 安装 ownCloud</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://download.owncloud.org/community/owncloud-10.0.3.tar.bz2 &amp;&amp; tar -xf ./owncloud-10.0.3.tar.bz2 &amp;&amp; rm -rf ./owncloud-10.0.3.tar.bz2 &amp;&amp; mv owncloud /usr/share/nginx/ &amp;&amp; chown -R nginx:nginx /usr/share/nginx/owncloud &amp;&amp; find /usr/share/nginx/owncloud -type d -exec chmod 755 &#123;&#125; \; &amp;&amp; find /usr/share/nginx/owncloud -type f -exec chmod 644 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-<h5 id="1-4-创建ownCloud数据库目录"><a href="#1-4-创建ownCloud数据库目录" class="headerlink" title="1.4 创建ownCloud数据库目录"></a>1.4 创建ownCloud数据库目录</h5><p>ownCloud 上的数据将存储到 /var/lib/owncloud 中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /var/lib/owncloud &amp;&amp; chown nginx:nginx /var/lib/owncloud</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-数据库配置"><a href="#2-数据库配置" class="headerlink" title="2. 数据库配置"></a>2. 数据库配置</h3><h4 id="2-1-初始化数据库"><a href="#2-1-初始化数据库" class="headerlink" title="2.1 初始化数据库"></a>2.1 初始化数据库</h4><h6 id="2-11-启动数据库"><a href="#2-11-启动数据库" class="headerlink" title="2.11 启动数据库"></a>2.11 启动数据库</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure>
-<h6 id="2-12-对数据库进行安全配置"><a href="#2-12-对数据库进行安全配置" class="headerlink" title="2.12 对数据库进行安全配置"></a>2.12 对数据库进行安全配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mysql_secure_installation</span><br><span class="line"></span><br><span class="line">NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB</span><br><span class="line">      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!</span><br><span class="line"></span><br><span class="line">In order to log into MariaDB to secure it, we&apos;ll need the current</span><br><span class="line">password for the root user.  If you&apos;ve just installed MariaDB, and</span><br><span class="line">you haven&apos;t set the root password yet, the password will be blank,</span><br><span class="line">so you should just press enter here.</span><br><span class="line"></span><br><span class="line">Enter current password for root (enter for none): </span><br><span class="line">OK, successfully used password, moving on...</span><br><span class="line"></span><br><span class="line">Setting the root password ensures that nobody can log into the MariaDB</span><br><span class="line">root user without the proper authorisation.</span><br><span class="line"></span><br><span class="line">Set root password? [Y/n] y</span><br><span class="line">New password:     #配置root密码</span><br><span class="line">Re-enter new password: </span><br><span class="line">Password updated successfully!</span><br><span class="line">Reloading privilege tables..</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">By default, a MariaDB installation has an anonymous user, allowing anyone</span><br><span class="line">to log into MariaDB without having to have a user account created for</span><br><span class="line">them.  This is intended only for testing, and to make the installation</span><br><span class="line">go a bit smoother.  You should remove them before moving into a</span><br><span class="line">production environment.</span><br><span class="line"></span><br><span class="line">Remove anonymous users? [Y/n] y</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from &apos;localhost&apos;.  This</span><br><span class="line">ensures that someone cannot guess at the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? [Y/n] n</span><br><span class="line"> ... skipping.</span><br><span class="line"></span><br><span class="line">By default, MariaDB comes with a database named &apos;test&apos; that anyone can</span><br><span class="line">access.  This is also intended only for testing, and should be removed</span><br><span class="line">before moving into a production environment.</span><br><span class="line"></span><br><span class="line">Remove test database and access to it? [Y/n] n</span><br><span class="line"> ... skipping.</span><br><span class="line"></span><br><span class="line">Reloading the privilege tables will ensure that all changes made so far</span><br><span class="line">will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? [Y/n] y</span><br><span class="line"> ... Success!</span><br><span class="line"></span><br><span class="line">Cleaning up...</span><br><span class="line"></span><br><span class="line">All done!  If you&apos;ve completed all of the above steps, your MariaDB</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks for using MariaDB!</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-ownCloud-专属数据库的设置"><a href="#2-2-ownCloud-专属数据库的设置" class="headerlink" title="2.2 ownCloud 专属数据库的设置"></a>2.2 ownCloud 专属数据库的设置</h4><h6 id="2-21-进入数据库命令行界面"><a href="#2-21-进入数据库命令行界面" class="headerlink" title="2.21 进入数据库命令行界面"></a>2.21 进入数据库命令行界面</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mysql -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 7</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt;</span><br></pre></td></tr></table></figure>
-<h6 id="2-22-创建一个用户用于读写-ownCloud-数据库"><a href="#2-22-创建一个用户用于读写-ownCloud-数据库" class="headerlink" title="2.22 创建一个用户用于读写 ownCloud 数据库"></a>2.22 创建一个用户用于读写 ownCloud 数据库</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &apos;owncloud&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;owncloud&apos;;</span><br></pre></td></tr></table></figure>
-<h6 id="2-23-创建-ownCloud-数据库"><a href="#2-23-创建-ownCloud-数据库" class="headerlink" title="2.23 创建 ownCloud 数据库"></a>2.23 创建 ownCloud 数据库</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE owncloud;</span><br></pre></td></tr></table></figure>
-<h6 id="2-24-创为用户授予读写权限"><a href="#2-24-创为用户授予读写权限" class="headerlink" title="2.24 创为用户授予读写权限"></a>2.24 创为用户授予读写权限</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON owncloud.* TO &apos;owncloud&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;owncloud&apos;;</span><br></pre></td></tr></table></figure>
-<h6 id="2-25-刷新权限表"><a href="#2-25-刷新权限表" class="headerlink" title="2.25 刷新权限表"></a>2.25 刷新权限表</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-<h3 id="3-配置nginx"><a href="#3-配置nginx" class="headerlink" title="3. 配置nginx"></a>3. 配置nginx</h3><h6 id="3-1-创建-ownCloud-专属配置文件"><a href="#3-1-创建-ownCloud-专属配置文件" class="headerlink" title="3.1 创建 ownCloud 专属配置文件"></a>3.1 创建 ownCloud 专属配置文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nginx/conf.d/owncloud.conf</span><br></pre></td></tr></table></figure>
-<p>请按实际情况以及注释提示修改以下内容，在命令行窗口按下 i ，将内容直接粘贴到命令行窗口中，再按下 ESC ，最后输入 :wq 按回车<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">upstream php-handler &#123;</span><br><span class="line">    server unix:/run/php-fpm/owncloud.sock;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name cloud.example.com;  # cloud.example.com 改为您的域名</span><br><span class="line">    </span><br><span class="line">    location /.well-known/acme-challenge/ &#123;</span><br><span class="line">        root /usr/share/nginx/owncloud;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    location / &#123;</span><br><span class="line">        return 301 https://$server_name$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    server_name cloud.example.com;  # cloud.example.com 改为您的域名</span><br><span class="line"></span><br><span class="line">    ssl_certificate /etc/pki/tls/owncloud.pem;  # 域名证书文件位置，需要修改</span><br><span class="line">    ssl_certificate_key /etc/pki/tls/private/owncloud_key.pem;  # 域名证书私钥文件位置，需要修改</span><br><span class="line"></span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">    ssl_ciphers &quot;-ALL:EECDH+AES256:EDH+AES256:AES256-SHA:EECDH+AES:EDH+AES:!ADH:!NULL:!aNULL:!eNULL:!EXPORT:!LOW:!MD5:!3DES:!PSK:!SRP:!DSS:!AESGCM:!RC4&quot;;</span><br><span class="line">    ssl_dhparam /etc/pki/tls/certs/dh4096.pem;</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line">    keepalive_timeout    70;</span><br><span class="line">    ssl_stapling on;</span><br><span class="line">    ssl_stapling_verify on;</span><br><span class="line"></span><br><span class="line">    add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;</span><br><span class="line">    add_header X-Content-Type-Options nosniff;</span><br><span class="line">    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;</span><br><span class="line">    add_header X-XSS-Protection &quot;1; mode=block&quot;;</span><br><span class="line">    add_header X-Robots-Tag none;</span><br><span class="line">    add_header X-Download-Options noopen;</span><br><span class="line">    add_header X-Permitted-Cross-Domain-Policies none;</span><br><span class="line"></span><br><span class="line">    root /usr/share/nginx/owncloud;</span><br><span class="line"></span><br><span class="line">    location = /robots.txt &#123;</span><br><span class="line">        allow all;</span><br><span class="line">        log_not_found off;</span><br><span class="line">        access_log off;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location = /.well-known/carddav &#123;</span><br><span class="line">        return 301 $scheme://$host/remote.php/dav;</span><br><span class="line">    &#125;</span><br><span class="line">    location = /.well-known/caldav &#123;</span><br><span class="line">        return 301 $scheme://$host/remote.php/dav;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    client_max_body_size 16G;</span><br><span class="line">    fastcgi_buffers 64 4K;</span><br><span class="line"></span><br><span class="line">    gzip off;</span><br><span class="line"></span><br><span class="line">    error_page 403 /core/templates/403.php;</span><br><span class="line">    error_page 404 /core/templates/404.php;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        rewrite ^ /index.php$uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ &#123;</span><br><span class="line">        return 404;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ ^/(?:\.|autotest|occ|issue|indie|db_|console) &#123;</span><br><span class="line">        return 404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+|core/templates/40[34])\.php(?:$|/) &#123;</span><br><span class="line">        fastcgi_split_path_info ^(.+\.php)(/.*)$;</span><br><span class="line">        include fastcgi_params;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        fastcgi_param SCRIPT_NAME $fastcgi_script_name; </span><br><span class="line">        fastcgi_param PATH_INFO $fastcgi_path_info;</span><br><span class="line">        fastcgi_param HTTPS on;</span><br><span class="line">        fastcgi_param modHeadersAvailable true; </span><br><span class="line">        fastcgi_param front_controller_active true;</span><br><span class="line">        fastcgi_read_timeout 180; </span><br><span class="line">        fastcgi_pass php-handler;</span><br><span class="line">        fastcgi_intercept_errors on;</span><br><span class="line">        fastcgi_request_buffering off; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ ^/(?:updater|ocs-provider)(?:$|/) &#123;</span><br><span class="line">        try_files $uri $uri/ =404;</span><br><span class="line">        index index.php;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.(?:css|js)$ &#123;</span><br><span class="line">        try_files $uri /index.php$uri$is_args$args;</span><br><span class="line">        add_header Cache-Control &quot;max-age=15778463&quot;;</span><br><span class="line">        add_header X-Content-Type-Options nosniff;</span><br><span class="line">        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;</span><br><span class="line">        add_header X-XSS-Protection &quot;1; mode=block&quot;;</span><br><span class="line">        add_header X-Robots-Tag none;</span><br><span class="line">        add_header X-Download-Options noopen;</span><br><span class="line">        add_header X-Permitted-Cross-Domain-Policies none;</span><br><span class="line">        access_log off;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.(?:svg|gif|png|html|ttf|woff|ico|jpg|jpeg|map)$ &#123;</span><br><span class="line">        add_header Cache-Control &quot;public, max-age=7200&quot;;</span><br><span class="line">        try_files $uri /index.php$uri$is_args$args;</span><br><span class="line">        access_log off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h6 id="3-2-生成-Nginx-所需的-DH-文件"><a href="#3-2-生成-Nginx-所需的-DH-文件" class="headerlink" title="3.2 生成 Nginx 所需的 DH 文件"></a>3.2 生成 Nginx 所需的 DH 文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl dhparam -out /etc/pki/tls/certs/dh4096.pem 4096</span><br></pre></td></tr></table></figure>
-<h6 id="3-3-生成-Nginx-所需的-ssl-证书，并且放到对应目录下"><a href="#3-3-生成-Nginx-所需的-ssl-证书，并且放到对应目录下" class="headerlink" title="3.3 生成 Nginx 所需的 ssl 证书，并且放到对应目录下"></a>3.3 生成 Nginx 所需的 ssl 证书，并且放到对应目录下</h6><p>域名证书私钥文<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out owncloud_key.pem 2048</span><br></pre></td></tr></table></figure></p>
-<p>生成一个证书请求<br>这个命令将会生成一个证书请求，当然，用到了前面生成的密钥privkey.pem文件 这里将生成一个新的文件cert.csr，<br>即一个证书请求文件，你可以拿着这个文件去数字证书颁发机构（即CA）申请一个数字证书。CA会给你一个新的文件cacert.pem，那才是你的数字证书。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key owncloud_key.pem  -out cert.csr</span><br></pre></td></tr></table></figure></p>
-<p>因为我们是测试，所以证书的申请机构和颁发机构都是自己。就可以用下面这个命令来生成证书：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -x509 -key owncloud_key.pem -out owncloud.pem -days 1095</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-配置-PHP-FPM"><a href="#4-配置-PHP-FPM" class="headerlink" title="4. 配置 PHP-FPM"></a>4. 配置 PHP-FPM</h3><h6 id="4-1-创建-ownCloud-专属配置文件"><a href="#4-1-创建-ownCloud-专属配置文件" class="headerlink" title="4.1 创建 ownCloud 专属配置文件"></a>4.1 创建 ownCloud 专属配置文件</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/php-fpm.d/owncloud.conf</span><br></pre></td></tr></table></figure>
-<p>将下面内容增加到文件中，并且保存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[owncloud]</span><br><span class="line">user = nginx</span><br><span class="line">group = nginx</span><br><span class="line">listen = /run/php-fpm/owncloud.sock</span><br><span class="line">listen.owner = nginx</span><br><span class="line">listen.group = nginx</span><br><span class="line">listen.mode = 0600</span><br><span class="line">pm = dynamic</span><br><span class="line">pm.max_children = 50</span><br><span class="line">pm.start_servers = 5</span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line">slowlog = /var/log/php-fpm/owncloud-slow.log</span><br><span class="line">php_admin_value[error_log] = /var/log/php-fpm/owncloud-error.log</span><br><span class="line">php_admin_flag[log_errors] = on</span><br><span class="line">php_value[memory_limit] = 512M</span><br><span class="line">php_value[session.save_handler] = files</span><br><span class="line">php_value[session.save_path]    = /var/lib/php/session</span><br><span class="line">php_value[soap.wsdl_cache_dir]  = /var/lib/php/wsdlcache</span><br><span class="line">php_value[upload_max_filesize] = 16G</span><br><span class="line">php_value[post_max_size] = 16G</span><br><span class="line">php_value[max_input_time] = 3600</span><br><span class="line">php_value[max_execution_time] = 3600</span><br><span class="line">php_value[date.timezone] = Asia/Shanghai</span><br><span class="line">env[HOSTNAME] = $HOSTNAME</span><br><span class="line">env[PATH] = /usr/local/bin:/usr/bin:/bin</span><br><span class="line">env[TMP] = /tmp</span><br><span class="line">env[TMPDIR] = /tmp</span><br><span class="line">env[TEMP] = /tmp</span><br></pre></td></tr></table></figure></p>
-<h6 id="4-2-创建-PHP-会话目录"><a href="#4-2-创建-PHP-会话目录" class="headerlink" title="4.2 创建 PHP 会话目录"></a>4.2 创建 PHP 会话目录</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/lib/php/session &amp;&amp; chown -R nginx:nginx /var/lib/php/session</span><br></pre></td></tr></table></figure>
-<h3 id="5-启动服务"><a href="#5-启动服务" class="headerlink" title="5. 启动服务"></a>5. 启动服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx php-fpm redis</span><br><span class="line">systemctl enable nginx php-fpm mariadb redis</span><br></pre></td></tr></table></figure>
-<h3 id="6-配置owncloud"><a href="#6-配置owncloud" class="headerlink" title="6.配置owncloud"></a>6.配置owncloud</h3><p>登陆<a href="https://url" target="_blank" rel="noopener">https://url</a><br>配置数据库 、数据存储目录、创建admin账号密码</p>
-<p><img src="http://dingbingbing.top/img/WX201803211507302x.png"></p>
+    if theme.post_copyright.enable == true
+      div
+        ul.post-copyright
+          li.post-copyright-author
+            strong= __('copyright_author_prefix')
+            = theme.post_copyright.author
+          li.post-copyright-link
+            strong= __('copyright_link_prefix')
+            a(href='/' + page.path)= page.permalink
+          li.post-copyright-license
+            strong= __('copyright_declare_prefix')
+            if theme.post_copyright.copyright_text
+              != theme.post_copyright.copyright_text
+            else
+              != __('copyright_default_text')
+      br
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://dingbingbing.top/2018/03/13/部署私有云owncloud/" data-id="cjneirw1s000fyywfux66229x" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/03/28/centos6安装vsftp/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          centos6安装vsftp
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/01/24/MAC下安装pycurl解决办法/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">MAC下安装pycurl解决办法</div>
-    </a>
-  
-</nav>
+    if theme.shareto == true
+      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
+      a.article-share-link(data-url=page.permalink, data-id=page._id, data-qrcode=qrcode(page.permalink))= __('shareto')
 
-  
-</article>
+    include _partial/tag.pug
+    include _partial/post_nav.pug
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/10/18/Atom-as-Go-IDE/">Atom as Go IDE</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/17/gogs部署使用/">gogs部署使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/12/交换机监控/">交换机监控</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/25/Kubernetes单节点部署/">Kubernetes单节点部署</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/08/confluence6-3安装与破解/">confluence6.3安装与破解</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 Ice Ding<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments
+      include _partial/comments.pug
