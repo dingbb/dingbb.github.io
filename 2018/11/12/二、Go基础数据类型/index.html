@@ -150,7 +150,9 @@
 <p>常规数组声明方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[32]byte  //长度为32的数组，每个元素为一个字节</span><br><span class="line">[2*N] struct &#123;x,y int32&#125; //复杂类型函数组</span><br><span class="line">[1000]*float64 //指针数组</span><br><span class="line">[3][5]int      //二维数组,一个3行5列，总共可以放15个整型元素</span><br><span class="line">[2][2][2]float64  //等同与[2]</span><br><span class="line">[2]([2]float64)</span><br><span class="line">````   </span><br><span class="line"></span><br><span class="line">在go语言中，数组长度在定义后就不可更改。数组的长度是是该数组的内置常量，</span><br><span class="line">可以通过go语言的内置函数len()来获取。</span><br><span class="line">下面是获取数组arr元素个数的写法:</span><br></pre></td></tr></table></figure></p>
 <p>arrLength := len(arr)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 数组切片</span><br><span class="line">数组的特点：</span><br><span class="line">- 数组长度自定义之后无法修改</span><br><span class="line">- 数组是值类型，每次传递都产生一份副本</span><br><span class="line">所以go语言提供了数组切片(slice)来祢补数组的不足。</span><br><span class="line"></span><br><span class="line">数组切片的数据结构可以抽象为一下3个变量:</span><br><span class="line">- 一个指向原生数组的指针</span><br><span class="line">- 数组切片中的元素个数</span><br><span class="line">- 数组切片已分配的存储空间</span><br><span class="line"></span><br><span class="line">创建数组切片主要有两种方法</span><br><span class="line">- 基于数组</span><br></pre></td></tr></table></figure></p>
 <p>//定义一个数组<br>var myArray [10]int = [10]int{1,2,3,4,5,6,7,8,9,10}<br>//基于数组创建一个数组切片<br>var myArray [] int = myArray[“:5”]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 直接创建</span><br></pre></td></tr></table></figure></p>
-<p>//go语言体统了内置函数用于创建数组切片<br>mySlice1 := make([]int,5) //创建一个初始元素个数为5的数组欺骗<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##### map</span><br><span class="line">map是一堆健值对的未排序集合。比如身份证号作为唯一键值来标识一个人的信息。</span><br></pre></td></tr></table></figure></p>
+<p>//go语言体统了内置函数用于创建数组切片<br>mySlice1 := make([]int,5) //创建一个初始元素个数为5的数组欺骗<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">##### map</span><br><span class="line">map是一堆健值对的未排序集合。比如身份证号作为唯一键值来标识一个人的信息。</span><br><span class="line">- 定义map</span><br></pre></td></tr></table></figure></p>
+<p>/<em> 声明变量，默认map 是 nil </em>/<br>var map_variable map[key_data_type]value_data_type<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 使用变量</span><br></pre></td></tr></table></figure></p>
+<p>/<em> 使用 make 函数 </em>/<br>map_variable := make(map[key_data_type]value_data_type)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 实例</span><br></pre></td></tr></table></figure></p>
 <p>package main</p>
 <p>import (<br>    “fmt”<br>)</p>
 <p>//PersonInfo是一个包含个人详细信息的类型<br>type PersonInof struct {<br>    ID      string<br>    Name    string<br>    Address string<br>}</p>
@@ -168,5 +170,69 @@ if ok {
 } else {
     fmt.Println(&quot;没找到这id是1234的人&quot;)
 }
-</code></pre><p>}<br>````</p>
-</div><div class="tags"><a href="/tags/Golang/">Golang</a></div><div class="post-nav"><a class="pre" href="/2018/11/15/高并发并行执行shell命令/">高并发并行执行shell命令</a><a class="next" href="/2018/11/08/一、Go语言变量和常量/">一、Go语言变量和常量</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://dingbingbing.top"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/ELK/" style="font-size: 15px;">ELK</a> <a href="/tags/Golang/" style="font-size: 15px;">Golang</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/ELK部署并且配置sudo日志分析/">ELK部署并且配置sudo日志分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/libvirt-go使用/">libvirt-go使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/高并发并行执行shell命令/">高并发并行执行shell命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/12/二、Go基础数据类型/">二、Go基础数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/一、Go语言变量和常量/">一、Go语言变量和常量</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/GitHub上优秀的Go开源项目/">GitHub上优秀的Go开源项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/Go相关链接/">Go相关链接</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/27/golang开发环境安装/">golang开发环境安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/25/golang-vim环境搭建/">golang vim环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/24/vim升级到8-0/">vim升级到8.0</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">怪叔叔的博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### map元素删除</span><br><span class="line">delete()函数用于删除集合的元素，参数为map和其对应的key</span><br></pre></td></tr></table></figure></p>
+<p>delte(myMap,”1234”)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#####  map 元素查找</span><br><span class="line">在go语言中,map的查找功能设计的比较轻巧。判断能否从map中获取一个值的常规做法是：</span><br><span class="line">- 声明并且初始化一个变量为空。</span><br><span class="line">- 试图从map中获取相对应的键值到该变量中</span><br><span class="line">- 判断该变量是否依旧为空，如果为空则表示map中没有包含该变量。</span><br><span class="line"></span><br><span class="line">其实，判断是成功找到特定的键值，不需要检查取到的值是否为nil</span><br><span class="line">只需要查看第二个返回值。要从map中找到特定的键，可以通过下面代码来实现：</span><br></pre></td></tr></table></figure></p>
+<p>value, ok := myMap[“1234”]<br>if ok { //找到了<br>   //处理找到的value<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### map元素修改(赋值)</span><br><span class="line">- 直接修改</span><br></pre></td></tr></table></figure></p>
+<p>myMap[“1234”] = 456<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- 间接修改</span><br><span class="line">map是一种引用类型,如果两个map同时指向一个底层，那么一个改变，另外一个也相对应的改变</span><br></pre></td></tr></table></figure></p>
+<p>myMap1 := myMap<br>myMap1[“1234”] = “456”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 实例代码</span><br></pre></td></tr></table></figure></p>
+<p>package main</p>
+<p>import(<br>    “fmt”<br>)</p>
+<p>type persionInfo struct{<br>    ID string<br>    Name string<br>    Address string<br>}</p>
+<p>func main(){<br>    /<em><br>    //声明一个map变量numbers,键名为string,值为int<br>    var numbers map[string] int<br>    //给map变量创建值,同时指定最多可以存储3个int值<br>    numbers = make(map[string] int, 3)<br>    //map元素赋值<br>    numbers[“one”] = 1<br>    numbers[“two”] = 2<br>    numbers[“three”] = 3
+    </em>/</p>
+<pre><code>//上面方式的简写方法
+numbers := map[string] int{
+    &quot;one&quot;: 1,
+    &quot;two&quot;: 2,
+    &quot;three&quot;: 3,
+}
+
+var myMap map[string] persionInfo
+myMap = make(map[string] persionInfo)
+myMap[&quot;persion1&quot;] = persionInfo{&quot;1&quot;, &quot;Amiee&quot;, &quot;Street 101&quot;}
+myMap[&quot;persion2&quot;] = persionInfo{&quot;2&quot;, &quot;Beva&quot;, &quot;Street 102&quot;}
+myMap[&quot;persion3&quot;] = persionInfo{&quot;3&quot;, &quot;Cencey&quot;, &quot;Street 103&quot;}
+
+/*
+// 上面方式的简写方法
+myMap := map[string] persionInfo{
+    &quot;persion1&quot;: persionInfo{&quot;1&quot;, &quot;Amiee&quot;, &quot;Street 101&quot;},
+    &quot;persion2&quot;: persionInfo{&quot;2&quot;, &quot;Beva&quot;, &quot;Street 102&quot;},
+    &quot;persion3&quot;: persionInfo{&quot;3&quot;, &quot;Cencey&quot;, &quot;Street 103&quot;},
+}
+*/
+
+//map元素打印
+fmt.Printf(&quot;%v\n&quot;, numbers)
+fmt.Println(numbers)
+fmt.Println(numbers[&quot;two&quot;])
+
+fmt.Println(myMap)
+fmt.Println(myMap[&quot;persion1&quot;])
+
+//map元素查找
+p1, ok := myMap[&quot;persion1&quot;]
+if ok{
+    fmt.Println(&quot;Found persion1, name&quot;, p1.Name, &quot;, info&quot;, p1 )
+}else{
+    fmt.Println(&quot;Not Found persion1&quot;)
+}
+
+//map元素修改
+//map是一种引用类型，如果两个map同时指向一个底层，那么一个改变，另一个也相应的改变。
+numbersTest := numbers
+numbersTest[&quot;one&quot;] = 11
+fmt.Println(numbers)
+
+//map元素删除
+delete(numbers, &quot;one&quot;)
+fmt.Println(numbers)
+</code></pre><p>}</p>
+<p>````</p>
+<h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><ul>
+<li>map是无序的，每次打印出来的map都会不一样，它不能通过index获取，而必须通过key获取</li>
+<li>map的长度是不固定的，也就是和slice一样，也是一种引用类型</li>
+<li>内置的len函数同样适用与map，返回map拥有的key的数量</li>
+<li>map的值可以很方便的修改，通过重新赋值即可</li>
+</ul>
+</div><div class="tags"><a href="/tags/Golang/">Golang</a></div><div class="post-nav"><a class="pre" href="/2018/11/15/高并发并行执行shell命令/">高并发并行执行shell命令</a><a class="next" href="/2018/11/08/一、Go语言变量和常量/">一、Go语言变量和常量</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://dingbingbing.top"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/ELK/" style="font-size: 15px;">ELK</a> <a href="/tags/Golang/" style="font-size: 15px;">Golang</a> <a href="/tags/vim/" style="font-size: 15px;">vim</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/12/06/GO流程控制/">GO流程控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/06/vim安装markdown插件/">vim安装markdown插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/02/Go编程基础/">Go编程基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/27/ELK部署并且配置sudo日志分析/">ELK部署并且配置sudo日志分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/26/libvirt-go使用/">libvirt-go使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/15/高并发并行执行shell命令/">高并发并行执行shell命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/12/二、Go基础数据类型/">二、Go基础数据类型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/一、Go语言变量和常量/">一、Go语言变量和常量</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/GitHub上优秀的Go开源项目/">GitHub上优秀的Go开源项目</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/08/Go相关链接/">Go相关链接</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">怪叔叔的博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
